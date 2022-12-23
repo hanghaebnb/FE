@@ -1,7 +1,10 @@
 import React from 'react';
+import Routers from './shared/Routers';
 
-function App() {
-  return <>hello</>;
+export default function App() {
+  return (
+    <>
+      <Routers />
+    </>
+  );
 }
-
-export default App;
