@@ -5881,7 +5881,7 @@ eslint-plugin-html@^7.1.0:
   dependencies:
     htmlparser2 "^8.0.1"
 
-eslint-plugin-import@^2.25.3:
+eslint-plugin-import@^2.25.3, eslint-plugin-import@^2.26.0:
   version "2.26.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.26.0.tgz#f812dc47be4f2b72b478a021605a59fc6fe8b88b"
   integrity sha512-hYfi3FXaM8WPLf4S1cikh/r4IxnO6zrhZbEGz2b660EJRbuxgpDS5gkCuYgGWg2xxh2rBuIr4Pvhve/7c31koA==
@@ -7160,6 +7160,11 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+heic2any@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/heic2any/-/heic2any-0.0.3.tgz#59248665a3646424b1f88c0aaaa1abba3bbd1aae"
+  integrity sha512-1KG0LzZuIPiqyJjwLgGlgrgWd3UBwUE9g5+tOuHy8PbeH2hF0U4gc4ZWT4ChlCmcdISr1xVRimSehsTOPdRXnQ==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
