@@ -38,7 +38,7 @@ export const createRoom = createAsyncThunk('room/CREATE_ROOM', async (payload, t
   }
 });
 
-export const __readRooms = createAsyncThunk('room/READ_ROOMS', async (payload, thunkAPI) => {
+export const readRooms = createAsyncThunk('room/READ_ROOMS', async (payload, thunkAPI) => {
   try {
     const response = await baseURL.get(`/api/rooms?${payload}`);
     return thunkAPI.fulfillWithValue(response.data);
@@ -91,14 +91,14 @@ const roomSlice = createSlice({
       state.error = action.payload;
     },
 
-    [__readRooms.pending]: (state) => {
+    [readRooms.pending]: (state) => {
       state.isLoading = true;
     },
-    [__readRooms.fulfilled]: (state, action) => {
+    [readRooms.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.rooms = action.payload;
     },
-    [__readRooms.rejected]: (state, action) => {
+    [readRooms.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
