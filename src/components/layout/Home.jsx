@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Main from "../pages/Main";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Main from '../pages/Main';
 
 export default function Home() {
   /* 
@@ -11,7 +11,7 @@ export default function Home() {
     5. main에 state값이 최신화되어 넘어간다. ok
     6. main에서 state값으로 lists의 값과 비교하여 동일한 값을 화면에 뿌려준다.
   */
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState('');
 
   return (
     <StWrapper>

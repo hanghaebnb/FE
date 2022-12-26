@@ -1,74 +1,62 @@
 // src/redux/modules/counterSlice.js
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const instance = axios.create({
   baseURL: `http://localhost:3001/api`,
 });
 
-export const getComm = createAsyncThunk(
-  "getComm",
-  async (payload, ThunkAPI) => {
-    try {
-      const data = await instance.get("/rooms");
-      return ThunkAPI.fulfillWithValue(data.data);
-      // Promise가 resolve 됬을 경우
-    } catch (error) {
-      return ThunkAPI.rejectWithValue(error);
-      /* ThunkAPI. */
-    }
+export const getComm = createAsyncThunk('getComm', async (payload, ThunkAPI) => {
+  try {
+    const data = await instance.get('/rooms');
+    return ThunkAPI.fulfillWithValue(data.data);
+    // Promise가 resolve 됬을 경우
+  } catch (error) {
+    return ThunkAPI.rejectWithValue(error);
+    /* ThunkAPI. */
   }
-);
+});
 
-export const postComm = createAsyncThunk(
-  "postComm",
-  async (payload, ThunkAPI) => {
-    try {
-      console.log(payload);
-      const data = await instance.post("/rooms", payload);
-      return ThunkAPI.fulfillWithValue(data.data);
+export const postComm = createAsyncThunk('postComm', async (payload, ThunkAPI) => {
+  try {
+    console.log(payload);
+    const data = await instance.post('/rooms', payload);
+    return ThunkAPI.fulfillWithValue(data.data);
 
-      // Promise가 resolve 됬을 경우
-    } catch (error) {
-      console.log(error);
-      return ThunkAPI.rejectWithValue(error);
-      /* ThunkAPI. */
-    }
+    // Promise가 resolve 됬을 경우
+  } catch (error) {
+    console.log(error);
+    return ThunkAPI.rejectWithValue(error);
+    /* ThunkAPI. */
   }
-);
-export const setReple = createAsyncThunk(
-  "setReple",
-  async (payload, ThunkAPI) => {
-    try {
-      console.log(payload);
-      const data = await instance.post("/rooms", payload);
-      return ThunkAPI.fulfillWithValue(data.data);
+});
+export const setReple = createAsyncThunk('setReple', async (payload, ThunkAPI) => {
+  try {
+    console.log(payload);
+    const data = await instance.post('/rooms', payload);
+    return ThunkAPI.fulfillWithValue(data.data);
 
-      // Promise가 resolve 됬을 경우
-    } catch (error) {
-      console.log(error);
-      return ThunkAPI.rejectWithValue(error);
-      /* ThunkAPI. */
-    }
+    // Promise가 resolve 됬을 경우
+  } catch (error) {
+    console.log(error);
+    return ThunkAPI.rejectWithValue(error);
+    /* ThunkAPI. */
   }
-);
-export const getReple = createAsyncThunk(
-  "getReple",
-  async (payload, ThunkAPI) => {
-    try {
-      console.log(payload);
-      const data = await instance.get("/rooms");
-      return ThunkAPI.fulfillWithValue(data.data);
+});
+export const getReple = createAsyncThunk('getReple', async (payload, ThunkAPI) => {
+  try {
+    console.log(payload);
+    const data = await instance.get('/rooms');
+    return ThunkAPI.fulfillWithValue(data.data);
 
-      // Promise가 resolve 됬을 경우
-    } catch (error) {
-      console.log(error);
-      return ThunkAPI.rejectWithValue(error);
-      /* ThunkAPI. */
-    }
+    // Promise가 resolve 됬을 경우
+  } catch (error) {
+    console.log(error);
+    return ThunkAPI.rejectWithValue(error);
+    /* ThunkAPI. */
   }
-);
+});
 const initialState = {
   comm: [],
   reple: [],
@@ -78,7 +66,7 @@ const initialState = {
 };
 
 export const postSlice = createSlice({
-  name: "items",
+  name: 'items',
   initialState,
   reducers: {
     setComm(state, action) {

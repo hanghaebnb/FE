@@ -1,13 +1,13 @@
-import React, { useState } from "react"; // eslint-disable-line no-unused-vars
-import styled from "styled-components";
-import { IoIosClose } from "react-icons/io";
+import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import styled from 'styled-components';
+import { IoIosClose } from 'react-icons/io';
 // import LogIn from "../../hooks/Login";
 
 export default function Modal(props) {
-  const { modal, close, submit, header, button } = props;
+  const { children, modal, close, submit, header, button } = props;
 
   return (
-    <StModalContainer className={modal ? "modal open" : "modal"}>
+    <StModalContainer className={modal ? 'modal open' : 'modal'}>
       <div className="modal_inner">
         <div className="modal_header">
           <span>{header}</span>
@@ -15,7 +15,7 @@ export default function Modal(props) {
           <StClose className="modal_close_btn" onClick={close} />
         </div>
         <StContent>
-          <div className="modal_content_inner">{props.children}</div>
+          <div className="modal_content_inner">{children}</div>
           <div className="modal_footer">
             <StButton type="button" onClick={submit}>
               {button}

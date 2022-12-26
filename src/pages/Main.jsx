@@ -23,7 +23,13 @@ function Main() {
   }
 
   return (
-    <div style={{ maxWidth: '1920px', paddingInlineStart: '80px', paddingInlineEnd: '80px' }}>
+    <div
+      style={{
+        maxWidth: '1920px',
+        paddingInlineStart: '80px',
+        paddingInlineEnd: '80px',
+      }}
+    >
       <Topbar />
       <Button sx={{ mr: 2, mb: 2 }} variant="outlined" onClick={() => getHomes()}>
         주택

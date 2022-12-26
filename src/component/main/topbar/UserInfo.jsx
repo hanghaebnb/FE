@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Box, Modal, Typography } from '@mui/material';
 import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
+import SignUp from '../../signup/SignUp';
 
 function UserInfo() {
+  const [open, setOpen] = useState(false);
+  function handleOpen() {
+    setOpen(true);
+  }
   return (
-    <StUserInfoDiv>
-      <StUserInfoBtn>
-        <UserMenuIcon />
-        <UserIcon />
-      </StUserInfoBtn>
-    </StUserInfoDiv>
+    <>
+      <StUserInfoDiv>
+        <StUserInfoBtn onClick={() => handleOpen()}>
+          <UserMenuIcon />
+          <UserIcon />
+        </StUserInfoBtn>
+      </StUserInfoDiv>
+      <SignUp open={open} />
+    </>
   );
 }
 
