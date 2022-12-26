@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 // import { Link } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
@@ -25,16 +25,16 @@ export default function Header() {
         <StLogo>감자마-켓</StLogo>
       </StIconWrap>
       <StButtonWrap>
-        <StHeaderButton 
+        <StHeaderButton
         // onClick={onClickCreateHandler}
         >
           <StWriteSpan>작성하기</StWriteSpan>
-          <Pencil />
         </StHeaderButton>
-        <StHeaderButton 
+        <StHeaderButton
         // onClick={onLoginOutHandler}
         >
-          로그아웃</StHeaderButton>
+          로그아웃
+        </StHeaderButton>
       </StButtonWrap>
     </StHeader>
   );
@@ -45,7 +45,7 @@ const StHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  background-color: ${COLORS.BASE};
+  background-color: white;
   height: 50px;
 `;
 const StIconWrap = styled.div`

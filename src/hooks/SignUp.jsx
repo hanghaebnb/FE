@@ -25,7 +25,8 @@ const SignUp = () => {
     nickname: join.nickname,
     password: join.password,
   };
-  const useremailCheck = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+  const useremailCheck =
+    /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
   const usernicknameCheck = /^[a-z]+[a-z0-9]{5,19}$/g;
   const userpwCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
   const onCheckEmail = () => {
@@ -41,34 +42,34 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (emailCheck !== undefined) {
-      if (emailCheck.success === true) {
+    if (__checkEmail !== undefined) {
+      if (__checkEmail.success === true) {
         return alert("사용 가능한 email입니다.");
       } else {
         return alert("이미 사용중인 email이 있습니다.");
       }
     }
-  }, [dispatch, emailCheck]);
-  
+  }, [dispatch, __checkEmail]);
+
   useEffect(() => {
-    if (nameCheck !== undefined) {
-      if (nameCheck.success === true) {
+    if (__checkName !== undefined) {
+      if (__checkName.success === true) {
         return alert("사용 가능한 닉네임입니다.");
       } else {
         return alert("이미 사용중인 닉네임이 있습니다.");
       }
     }
-  }, [dispatch, nameCheck]);
+  }, [dispatch, __checkName]);
 
   useEffect(() => {
-    if (passwordCheck !== undefined) {
-      if (passwordCheck.success === true) {
+    if (__checkPw !== undefined) {
+      if (__checkPw.success === true) {
         return alert("사용 가능한 password입니다.");
       } else {
         return alert("이미 사용중인 password가 있습니다.");
       }
     }
-  }, [dispatch, nameCheck]);
+  }, [dispatch, __checkPw]);
 
   useEffect(() => {
     if (account !== undefined) {
@@ -89,37 +90,34 @@ const SignUp = () => {
   }, [account]);
 
   const onSubmitHandler = (event) => {
-    event.preventDefault()
-    if(!useremailCheck.test(obj.email)){
-      return alert("아이디 양식에 맞춰주세요")
+    event.preventDefault();
+    if (!useremailCheck.test(obj.email)) {
+      return alert("아이디 양식에 맞춰주세요");
     }
-    if(!usernicknameCheck.test(obj.nickname)){
-      return alert("닉네임 양식에 맞춰주세요")
+    if (!usernicknameCheck.test(obj.nickname)) {
+      return alert("닉네임 양식에 맞춰주세요");
     }
-    if(!userpwCheck.test(obj.password)){
-      return alert("비밀번호 양식에 맞춰주세요")
+    if (!userpwCheck.test(obj.password)) {
+      return alert("비밀번호 양식에 맞춰주세요");
     }
-    if(obj.email === "" || obj.email === undefined) {
-      return alert("빈칸을 입력해주세요.")
+    if (obj.email === "" || obj.email === undefined) {
+      return alert("빈칸을 입력해주세요.");
     }
-    if(obj.nickname === "" || obj.nickname === undefined) {
-      return alert("빈칸을 입력해주세요.")
+    if (obj.nickname === "" || obj.nickname === undefined) {
+      return alert("빈칸을 입력해주세요.");
     }
-    if(obj.password === "" || obj.password === undefined) {
-      return alert("비밀번호를 입력해주세요.")
+    if (obj.password === "" || obj.password === undefined) {
+      return alert("비밀번호를 입력해주세요.");
     }
 
-    dispatch(__userSignUp(obj))
-
-  }
+    dispatch(__userSignUp(obj));
+  };
   console.log("obj", obj);
   return (
     <>
       <div>
         <div>
-          <div>
-            회원가입
-          </div>
+          <div>회원가입</div>
           <input>
             <div className="id">
               <input
@@ -167,9 +165,9 @@ const SignUp = () => {
           <button>
             <button onClick={onSubmitHandler}>회원가입</button>
             <button
-              // onClick={() => {
-              //   navigate("/Login");
-              // }}
+            // onClick={() => {
+            //   navigate("/Login");
+            // }}
             >
               뒤로가기
             </button>

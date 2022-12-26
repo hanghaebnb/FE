@@ -1,7 +1,7 @@
 import React, { useState } from "react"; // eslint-disable-line no-unused-vars
 import styled from "styled-components";
 import { IoIosClose } from "react-icons/io";
-import SignUp from "../../hooks/SignUp";
+// import SignUp from "../../hooks/SignUp";
 
 export default function Modal(props) {
   const { modal, close, submit, header, button } = props;
@@ -11,7 +11,7 @@ export default function Modal(props) {
       <div className="modal_inner">
         <div className="modal_header">
           <span>{header}</span>
-          <SignUp/>
+          {/* <SignUp/> */}
           <StClose className="modal_close_btn" onClick={close} />
         </div>
         <StContent>

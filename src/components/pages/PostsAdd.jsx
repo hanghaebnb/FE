@@ -14,8 +14,8 @@ export default function PostsAdd() {
   const [posts, setPosts] = useState({
     title: "",
     description: "",
-    price:"",
-    address:"",
+    price: "",
+    address: "",
     imageFile: "",
   });
   const [prevImg, setPrevImg] = useState("");
@@ -32,14 +32,16 @@ export default function PostsAdd() {
   };
   //추가하기 버튼
   const onSumitHandler = () => {
-    if (posts.title.trim() === "" || 
-        posts.description.trim() === ""||
-        posts.price.trim() === "" ||
-        posts.address.trim() === "" ) {
+    if (
+      posts.title.trim() === "" ||
+      posts.description.trim() === "" ||
+      posts.price.trim() === "" ||
+      posts.address.trim() === ""
+    ) {
       return alert("모든 항목을 입력해주세요.");
     }
 
-    console.log(posts, image);
+    console.log(posts, imageFile);
 
     dispatch(
       __addPosts({

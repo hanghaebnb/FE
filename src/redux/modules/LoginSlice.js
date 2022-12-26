@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 // import { getCookie, setCookie, delCookie } from "../../cookie/cookie";
 // import instance from "../../shared/api";
 
@@ -18,7 +19,7 @@ const initialState = {
 
 const instance = axios.create({
   baseURL: `http://localhost:3001/api`,
-})
+});
 
 export const __userLogin = createAsyncThunk(
   "account/userLogin",
@@ -188,7 +189,7 @@ export const LoginSlice = createSlice({
 });
 
 // 액션크리에이터는 컴포넌트에서 사용하기 위해 export 하고
-export const { userLogin, userSignUp, checkEmail, checkPw , checkName} =
+export const { userLogin, userSignUp, checkEmail, checkPw, checkName } =
   LoginSlice.actions;
 // reducer 는 configStore에 등록하기 위해 export default 합니다.
 export default LoginSlice.reducer;
