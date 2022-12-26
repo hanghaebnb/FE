@@ -14,22 +14,14 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-import": "^0.13.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin": "^1.0.1",
-    "eslint-plugin-eslint-plugin": "^5.0.7",
-    "eslint-plugin-html": "^7.1.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.11",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "heic2any": "^0.0.3",
+    "hooks": "^0.3.2",
     "json-server": "^0.17.1",
     "prettier": "^2.8.1",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.0",
     "react-scripts": "^5.0.1",
@@ -63,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-import": "^2.26.0"
   }
 }

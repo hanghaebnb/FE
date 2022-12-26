@@ -1,0 +1,56 @@
+{
+  "posts": [
+    {
+      "title": "제목",
+      "description": "내용",
+      "price": "150000",
+      "address": "성수동",
+      "type": "hotel",
+      "userId": 1
+    }
+  ],
+  "comm": [
+    {
+      "name": "13414134",
+      "isClicked": false,
+      "id": 1
+    },
+    {
+      "name": "222232",
+      "isClicked": false,
+      "id": 2
+    },
+    {
+      "name": "ㅎㅎㅎㅎ",
+      "isClicked": false,
+      "id": 3
+    }
+  ],
+  "reple": [
+    {
+      "content": "1434123",
+      "id": "131",
+      "password": "3123",
+      "page": 3
+    },
+    {
+      "content": "4235235",
+      "id": "123",
+      "password": "12313",
+      "page": 1
+    },
+    {
+      "content": "4565545",
+      "id": "24",
+      "password": "5363414",
+      "page": 3
+    },
+    {
+      "content": "432",
+      "id": "234",
+      "password": "234234234",
+      "page": 4
+    }
+  ]
+}
+}

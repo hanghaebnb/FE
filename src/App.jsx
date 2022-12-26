@@ -1,12 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Container, Grid } from '@material-ui/core';
-import RoomCard from './component/main/RoomCard';
-import Topbar from './component/main/Topbar';
-import Main from './pages/Main';
+import React from "react";
+import Routers from "./shared/Routers";
 
-function App() {
-  return <Main />;
+export default function App() {
+  return (
+    <>
+      <Routers />
+    </>
+  );
 }
-
-export default App;
