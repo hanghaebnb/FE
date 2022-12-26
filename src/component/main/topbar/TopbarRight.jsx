@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Login from '../../login/Login';
 import LangIcon from './LangIcon';
 import UserInfo from './UserInfo';
@@ -14,7 +15,9 @@ function TopbarRight() {
       <StWrapper>
         <StNav>
           <StLink>
-            <StText>당신의 공간을 에어비앤비하세요</StText>
+            <StyledLink to="/rooms">
+              <StText>당신의 공간을 에어비앤비하세요</StText>
+            </StyledLink>
           </StLink>
           <StIconBtn onClick={() => handleOpen()}>
             <StIconWrapper>
@@ -93,5 +96,15 @@ const StIconBtn = styled.button`
   text-align: inherit;
   padding: 12px;
 `;
+const StyledLink = styled(Link)`
+  text-decoration: none;
 
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 export default TopbarRight;
