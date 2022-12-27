@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { TextField, Box, Modal, Typography } from '@mui/material';
+import { TextField, Box, Modal, Typography, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { signUp, login } from '../../redux/modules/loginSlice';
 
-function AccountForm({ open, isLogin }) {
+function AccountForm({ open, isLogin, handleClose }) {
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
   const [password, setPassword] = useState('');
@@ -45,13 +45,19 @@ function AccountForm({ open, isLogin }) {
   return (
     <Modal
       open={open}
-      // onClose={handleClose}
+      onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <StBox>
         <StHeader>
-          <StCloseIcon fontSize="25px" />
+          <StCloseIconBtn
+            sx={{ minHeight: 0, minWidth: 0, padding: 0, color: '#222222' }}
+            size="small"
+            onClick={() => handleClose()}
+          >
+            <CloseIcon style={{ fontSize: 20 }} />
+          </StCloseIconBtn>
           {isLogin ? '로그인' : '회원가입'}
           <StDiv />
         </StHeader>
@@ -92,6 +98,11 @@ function AccountForm({ open, isLogin }) {
     </Modal>
   );
 }
+const StCloseIconBtn = styled(IconButton)`
+  flex: 0 0 16px !important;
+  text-align: left !important;
+`;
+
 const StSubmitBtn = styled.button`
   cursor: pointer !important;
   display: inline-block !important;
@@ -141,12 +152,6 @@ const StH3 = styled.h3`
 const StDiv = styled.div`
   flex: 0 0 16px !important;
   text-align: right !important;
-`;
-
-const StCloseIcon = styled(CloseIcon)`
-  font-size: 25px;
-  flex: 0 0 16px !important;
-  text-align: left !important;
 `;
 
 const StHeader = styled.header`

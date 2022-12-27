@@ -6,20 +6,29 @@ import TopbarRight from './topbar/TopbarRight';
 
 function Topbar() {
   return (
-    <StHeader>
-      <StWrapper>
-        <StLogoWrapper>
-          <Logo />
-        </StLogoWrapper>
-        <StSearchWrapper>
-          <Search />
-        </StSearchWrapper>
-        <TopbarRight />
-      </StWrapper>
-    </StHeader>
+    <StDiv>
+      <StHeader>
+        <StWrapper>
+          <StLogoWrapper>
+            <Logo />
+          </StLogoWrapper>
+          <StSearchWrapper>
+            <Search />
+          </StSearchWrapper>
+          <TopbarRight />
+        </StWrapper>
+      </StHeader>
+    </StDiv>
   );
 }
-
+const StDiv = styled.div`
+  padding-inline-start: 80px;
+  padding-inline-end: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff;
+`;
 const StHeader = styled.header`
   height: 80px;
   width: 100%;
@@ -31,8 +40,6 @@ const StHeader = styled.header`
 `;
 
 const StWrapper = styled.div`
-  /* padding-inline-start: 80px; */
-  padding-inline-end: 80px;
   justify-content: space-between;
   align-items: center;
   display: flex;

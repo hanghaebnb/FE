@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Login from '../../login/Login';
 import LangIcon from './LangIcon';
 import UserInfo from './UserInfo';
 
 function TopbarRight() {
-  const [open, setOpen] = useState(false);
-  function handleOpen() {
-    setOpen(true);
-  }
   return (
-    <>
-      <StWrapper>
-        <StNav>
-          <StLink>
-            <StText>당신의 공간을 에어비앤비하세요</StText>
-          </StLink>
-          <StIconBtn onClick={() => handleOpen()}>
-            <StIconWrapper>
-              <LangIcon />
-            </StIconWrapper>
-          </StIconBtn>
-          <UserInfo />
-        </StNav>
-      </StWrapper>
-      <Login open={open} />
-    </>
+    <StWrapper>
+      <StNav>
+        <StLink>
+          <StText>당신의 공간을 에어비앤비하세요</StText>
+        </StLink>
+        <StIconBtn>
+          <StIconWrapper>
+            <LangIcon />
+          </StIconWrapper>
+        </StIconBtn>
+        <UserInfo />
+      </StNav>
+    </StWrapper>
   );
 }
 

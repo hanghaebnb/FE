@@ -1,41 +1,151 @@
 import React from 'react';
 import styled from 'styled-components';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { AspectRatio } from '@mui/joy';
+import { Grid } from '@mui/material';
+import { withStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import LikeButton from './card/LikeButton';
+import { addLike, deleteLike } from '../../redux/modules/roomSlice';
 
-function RoomCard() {
+const styles = {
+  cardcontent: {
+    padding: 0,
+    '&:last-child': {
+      paddingBottom: 0,
+    },
+  },
+};
+
+function RoomCard({ room }) {
+  const dispatch = useDispatch();
+  function like() {
+    dispatch(addLike(room.id));
+  }
+  function disLike() {
+    dispatch(deleteLike(room.id));
+  }
   return (
     <Card
       sx={{
         cursor: 'pointer',
         border: 'none',
         boxShadow: 'none',
+        mb: '16px',
       }}
     >
-      <CardMedia
-        sx={{ borderRadius: '8px' }}
-        component="img"
-        image="/img/room.webp"
-        alt="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          속초시, 한국
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          속초해수욕장
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          1월 1일~6일
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          1월 1일~6일
-        </Typography>
-      </CardContent>
+      <AspectRatio sx={{ mb: '12px' }} ratio="20/19">
+        <CardMedia
+          sx={{ borderRadius: '12px' }}
+          component="img"
+          image={room.imageList[0]}
+          alt="room img"
+        />
+        <LikeButton onClick={room.likeCheck ? disLike : like} likeCheck={room.likeCheck} />
+      </AspectRatio>
+      <AspectRatio sx={{ p: 0 }} ratio="3/1">
+        {/* <CardContent> */}
+        <Grid container spacing={0} direction="row">
+          <Grid item xs={12}>
+            <Typography
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 1 /* 라인수 */,
+                WebkitBoxOrient: 'vertical',
+                wordWrap: 'break-word',
+                lineHeight: '1.2em',
+                height: '1.2em',
+                fontSize: '15px',
+              }}
+              variant="body2"
+              component="div"
+            >
+              {room.address}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 1 /* 라인수 */,
+                WebkitBoxOrient: 'vertical',
+                wordWrap: 'break-word',
+                lineHeight: '1.2em',
+                height: '1.2em',
+                fontSize: '15px',
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {room.title}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 1 /* 라인수 */,
+                WebkitBoxOrient: 'vertical',
+                wordWrap: 'break-word',
+                lineHeight: '1.2em',
+                height: '1.2em',
+                fontSize: '15px',
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {room.description}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 1 /* 라인수 */,
+                WebkitBoxOrient: 'vertical',
+                wordWrap: 'break-word',
+                lineHeight: '1.2em',
+                height: '1.2em',
+                fontSize: '15px',
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {`₩${room.price} /박`}
+            </Typography>
+          </Grid>
+        </Grid>
+        {/* </CardContent> */}
+      </AspectRatio>
     </Card>
   );
 }
 
-export default RoomCard;
+// const StGrid = styled.div`
+//   font-size: 15px;
+//   line-height: 19px;
+//   display: grid;
+//   gap: 2px;
+//   grid-template-columns: 2px;
+// `;
+
+// const StAdress = styled.div`
+//   overflow: clip;
+//   line-height: inherit;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   color: #222222;
+//   font-weight: 600;
+// `;
+
+export default withStyles(styles, { withTheme: true })(RoomCard);
