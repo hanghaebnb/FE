@@ -2,6 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { instance } from '../../core/api/axios';
 
 const initialState = {
+  duplicate: {
+    emailDuplicate: true,
+    nickDuplicate: true,
+  },
   isLoading: false,
   error: null,
 };
@@ -28,10 +32,50 @@ export const login = createAsyncThunk('login/LOGIN', async (payload, thunkAPI) =
   }
 });
 
+export const checkDuplicationEmail = createAsyncThunk(
+  'login/CHECK_DUPLICATION_EMAIL',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await instance.post(`/api/users/email-check`, payload);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
+export const checkDuplicationNickname = createAsyncThunk(
+  'login/CHECK_DUPLICATION_NICKNAME',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await instance.post(`/api/users/nick-check`, payload);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
 const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    clearDuplicate: (state) => ({
+      ...state,
+      duplicate: { idDuplicate: true, nickDuplicate: true },
+    }),
+    clearEmailDuplicate: (state) => ({
+      ...state,
+      duplicate: { idDuplicate: true, nickDuplicate: state.duplicate.nickDuplicate },
+    }),
+    clearNickDuplicate: (state) => ({
+      ...state,
+      duplicate: {
+        idDuplicate: state.duplicate.idDuplicate,
+        nickDuplicate: true,
+      },
+    }),
+  },
   extraReducers: {
     [signUp.pending]: (state) => {
       state.isLoading = true;
@@ -43,7 +87,43 @@ const loginSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    [signUp.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [signUp.fulfilled]: (state, action) => {
+      state.isLoading = false;
+    },
+    [signUp.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [checkDuplicationEmail.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [checkDuplicationEmail.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.duplicate.emailDuplicate = action.payload;
+    },
+    [checkDuplicationEmail.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [checkDuplicationNickname.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [checkDuplicationNickname.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.duplicate.nickDuplicate = action.payload;
+    },
+    [checkDuplicationNickname.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
+export const { clearDuplicate, clearEmailDuplicate, clearNickDuplicate } = loginSlice.actions;
 export default loginSlice.reducer;
