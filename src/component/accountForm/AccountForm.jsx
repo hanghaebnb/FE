@@ -1,8 +1,5 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
-import React, { useState, useRef } from 'react';
-import { TextField, Box, Modal, Typography } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
@@ -149,8 +146,6 @@ function AccountForm({ open, isLogin, handleClose }) {
             />
           </StDivBox>
           <StBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>계속</StBtn>
-            계속
-          </StBtn>
           <Grid container columns={9}>
             <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
               <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>

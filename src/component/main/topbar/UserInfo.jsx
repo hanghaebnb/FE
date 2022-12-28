@@ -1,31 +1,24 @@
+/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Divider } from '@mui/material';
 import { useCookies } from 'react-cookie';
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
-=======
->>>>>>> feature/post
 import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
 import SignUp from '../../signup/SignUp';
 import Login from '../../login/Login';
-<<<<<<< HEAD
-// import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
-=======
->>>>>>> feature/post
+import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
 
 function UserInfo() {
+  // eslint-disable-next-line no-shadow
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-<<<<<<< HEAD
   // const { signUpOpen, loginOpen, anchorEl } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
-=======
->>>>>>> feature/post
   const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
   const open = Boolean(anchorEl);
 
