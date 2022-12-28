@@ -12,6 +12,7 @@ const initialState = {
     userId: 0,
     likeCheck: false,
   },
+  page: 0,
   isLoading: false,
   error: null,
 };
@@ -105,7 +106,11 @@ export const deleteLike = createAsyncThunk('room/DELETE_LIKE', async (payload, t
 const roomSlice = createSlice({
   name: 'room',
   initialState,
-  reducers: {},
+  reducers: {
+    initRooms: (state) => ({ ...state, rooms: [] }),
+    initPage: (state) => ({ ...state, page: 0 }),
+    increasePage: (state, payload) => ({ ...state, page: payload.payload + 1 }),
+  },
   extraReducers: {
     [createRoom.pending]: (state) => {
       state.isLoading = true;
@@ -135,7 +140,7 @@ const roomSlice = createSlice({
     },
     [nonMemberReadRooms.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.rooms = action.payload;
+      state.rooms = [...state.rooms, ...action.payload];
     },
     [nonMemberReadRooms.rejected]: (state, action) => {
       state.isLoading = false;
@@ -163,7 +168,32 @@ const roomSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    [addLike.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [addLike.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.rooms.filter((v) => v.id === action.payload.id)[0].likeCheck = action.payload.likeCheck;
+    },
+    [addLike.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [deleteLike.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteLike.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.rooms.filter((v) => v.id === action.payload.id)[0].likeCheck = action.payload.likeCheck;
+    },
+    [deleteLike.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
+export const { initPage, increasePage, initRooms } = roomSlice.actions;
 export default roomSlice.reducer;

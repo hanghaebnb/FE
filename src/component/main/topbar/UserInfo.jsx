@@ -9,6 +9,7 @@ import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
 import SignUp from '../../signup/SignUp';
 import Login from '../../login/Login';
+import { initPage, initRooms } from '../../../redux/modules/roomSlice';
 // import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
 
 function UserInfo() {
@@ -42,6 +43,8 @@ function UserInfo() {
   };
   function logout() {
     removeCookies('accessToken');
+    dispatch(initRooms());
+    dispatch(initPage());
   }
   return (
     <>
@@ -65,7 +68,7 @@ function UserInfo() {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={cookies.accessToken ? logout : handleLoginOpen}>
+          <MenuItem onClick={cookies.accessToken ? () => logout() : () => handleLoginOpen()}>
             {cookies.accessToken ? '로그아웃' : '로그인'}
           </MenuItem>
           <Divider />
