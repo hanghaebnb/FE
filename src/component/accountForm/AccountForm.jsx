@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
-import React, { useState, useRef } from 'react';
-import { TextField, Box, Modal, Typography } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,8 +19,6 @@ function AccountForm({ open, isLogin, handleClose }) {
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkNick, setCheckNick] = useState(false);
   const [disable, setDisable] = useState(true);
-
-function AccountForm({ open, isLogin }) {
   const contentInput = useRef();
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
@@ -148,14 +144,12 @@ function AccountForm({ open, isLogin }) {
               onChange={(event) => onPasswordChangeHandler(event)}
             />
           </StDivBox>
-          <StSubmitBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
-            계속
-          </StBtn>
+          <StBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>계속</StBtn>
           <Grid container columns={9}>
-            <Grid sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
+            <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
               <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
             </Grid>
-            <Grid xs={4} sm={4} md={4}>
+            <Grid item xs={4} sm={4} md={4}>
               <StBtn onClick={() => onCheckNick()}>닉네임 중복 확인</StBtn>
             </Grid>
           </Grid>

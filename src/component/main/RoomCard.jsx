@@ -35,6 +35,7 @@ function RoomCard({ room }) {
     dispatch(deleteLike(room.id));
     dispatch(readRooms());
   }
+  console.log(room);
   return (
     <Card
       sx={{
