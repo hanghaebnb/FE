@@ -123,7 +123,7 @@ const roomSlice = createSlice({
     },
     [readRooms.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.rooms = action.payload;
+      state.rooms = [...state.rooms, ...action.payload];
     },
     [readRooms.rejected]: (state, action) => {
       state.isLoading = false;
