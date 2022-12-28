@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
 import React, { useState, useRef } from 'react';
 import { TextField, Box, Modal, Typography } from '@mui/material';
+=======
+import React, { useEffect, useRef, useState } from 'react';
+import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
+>>>>>>> feature/post
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,14 +20,21 @@ import {
   checkDuplicationEmail,
   checkDuplicationNickname,
 } from '../../redux/modules/loginSlice';
+<<<<<<< HEAD
 
 function AccountForm({ open, isLogin, handleClose }) {
   const duplicate = useSelector((state) => state.login.duplicate);
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkNick, setCheckNick] = useState(false);
   const [disable, setDisable] = useState(true);
+=======
+>>>>>>> feature/post
 
-function AccountForm({ open, isLogin }) {
+function AccountForm({ open, isLogin, handleClose }) {
+  const duplicate = useSelector((state) => state.login.duplicate);
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkNick, setCheckNick] = useState(false);
+  const [disable, setDisable] = useState(true);
   const contentInput = useRef();
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
@@ -148,6 +160,7 @@ function AccountForm({ open, isLogin }) {
               onChange={(event) => onPasswordChangeHandler(event)}
             />
           </StDivBox>
+<<<<<<< HEAD
           <StSubmitBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
             계속
           </StBtn>
@@ -156,6 +169,14 @@ function AccountForm({ open, isLogin }) {
               <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
             </Grid>
             <Grid xs={4} sm={4} md={4}>
+=======
+          <StBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>계속</StBtn>
+          <Grid container columns={9}>
+            <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
+              <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
+            </Grid>
+            <Grid item xs={4} sm={4} md={4}>
+>>>>>>> feature/post
               <StBtn onClick={() => onCheckNick()}>닉네임 중복 확인</StBtn>
             </Grid>
           </Grid>
@@ -197,7 +218,10 @@ const StBtn = styled.button`
   width: 100% !important;
   margin-bottom: 24px !important;
   margin-top: 16px !important;
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/post
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
