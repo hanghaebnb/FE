@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import { TextField, Box, Modal, Typography } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,10 +22,18 @@ function AccountForm({ open, isLogin, handleClose }) {
   const [checkNick, setCheckNick] = useState(false);
   const [disable, setDisable] = useState(true);
 
+function AccountForm({ open, isLogin }) {
+  const contentInput = useRef();
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
   const [password, setPassword] = useState('');
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [modal, setModal] = useState(false);
+
+  const handler = () => {
+    setModal(!modal);
+    contentInput.current.value = '';
+  };
 
   const dispatch = useDispatch();
 
@@ -79,6 +89,10 @@ function AccountForm({ open, isLogin, handleClose }) {
     else setDisable(true);
   }, [checkEmail, checkNick]);
 
+  const closeEventHandler = () => {
+    handler();
+  };
+
   return (
     <Modal
       open={open}
@@ -100,34 +114,41 @@ function AccountForm({ open, isLogin, handleClose }) {
         </StHeader>
         <StInner>
           <StH3>에어비앤비에 오신 것을 환영합니다.</StH3>
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            value={email}
-            onChange={(event) => onEmailChangeHandler(event)}
-          />
-          {isLogin ? null : (
+          <StDivBox>
             <TextField
               fullWidth
               id="outlined-basic"
-              label="닉네임"
+              label="Email"
               variant="outlined"
-              value={nickname}
-              onChange={(event) => onNicknameChangeHandler(event)}
+              value={email}
+              onChange={(event) => onEmailChangeHandler(event)}
             />
+          </StDivBox>
+
+          {isLogin ? null : (
+            <StDivBox>
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                label="닉네임"
+                variant="outlined"
+                value={nickname}
+                onChange={(event) => onNicknameChangeHandler(event)}
+              />
+            </StDivBox>
           )}
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="비밀번호"
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={(event) => onPasswordChangeHandler(event)}
-          />
-          <StBtn disabled onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
+          <StDivBox>
+            <TextField
+              fullWidth
+              id="outlined-basic"
+              label="비밀번호"
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={(event) => onPasswordChangeHandler(event)}
+            />
+          </StDivBox>
+          <StSubmitBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
             계속
           </StBtn>
           <Grid container columns={9}>
@@ -230,5 +251,10 @@ const StBox = styled(Box)`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+`;
+const StDivBox = styled.div`
+  text-align: center;
+  margin-top: 20px;
+  justify-content: 10px;
 `;
 export default AccountForm;

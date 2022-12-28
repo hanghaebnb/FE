@@ -12,7 +12,7 @@ module.exports = {
     'eslint:recommended',
     'prettier',
   ],
-  plugins: ['react', 'import'],
+  plugins: ['react', 'import', 'prettier'],
   rules: {
     'no-unused-vars': ['off'], // 사용하지 않는 변수가 있을때 빌드에러가 나던 규칙 해제
     'no-console': ['off'], // 콘솔을 쓰면 에러가 나던 규칙 해제
@@ -24,5 +24,25 @@ module.exports = {
     'no-alert': 0, // alert 제한 규칙 해제
     'consistent-return': 0, // 화살표 함수에서 return이 안되는 규칙 해제
     'no-underscore-dangle': 0, // 함수 이름을 시작할 때 언더바를 사용할 수 없는 규칙 해제
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelComponents: ['CustomInputLabel'],
+        labelAttributes: ['label'],
+        controlComponents: ['CustomInput'],
+        depth: 3,
+      },
+    ],
+    'jsx-a11y/alt-text': [
+      2,
+      {
+        elements: ['img', 'object', 'area', 'input[type="image"]'],
+        img: ['Image'],
+        object: ['Object'],
+        area: ['Area'],
+        'input[type="image"]': ['InputImage'],
+      },
+    ],
   },
 };
