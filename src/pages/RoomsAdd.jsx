@@ -7,7 +7,7 @@ import ImageUpload from '../component/post/ImageFile/ImageUpload';
 import { createRoom } from '../redux/modules/roomSlice';
 import Topbar from '../component/main/TopbarRoom';
 
-export default function RoomsAdd() {
+export default function RoomsAdd(isLogin) {
   // 값을 담을 두 공간 필요 1. 제목 2. 내용
   // 따라서 2개의 useState가 필요 현재 상태를 저장하고
   // 변경할 수 있다.
@@ -20,13 +20,10 @@ export default function RoomsAdd() {
     description: '',
     price: '',
     address: '',
-    imageFile: '',
     type: '',
-    userId: '0',
-    likeCheck: false,
   });
   const [imageFile, setImageFile] = useState(null);
-
+  console.log('ImageFile', imageFile);
   useEffect(() => {
     console.log(imageFile);
   }, [imageFile]);
@@ -47,7 +44,7 @@ export default function RoomsAdd() {
     //   return alert('모든 항목을 입력해주세요.');
     // }
 
-    console.log(rooms, imageFile);
+    console.log(rooms);
 
     dispatch(
       createRoom({
@@ -57,7 +54,6 @@ export default function RoomsAdd() {
         address: rooms.address,
         imageFile,
         type: rooms.type,
-        userId: '0',
       }),
     );
     navigate(`/`);
@@ -138,8 +134,8 @@ export default function RoomsAdd() {
             type=""
             value={rooms.type}
             onChange={(e) => {
-              setRooms(e.target.value);
-              console.log(rooms);
+              setRooms({ ...rooms, type: e.target.value });
+              console.log(e.target.value);
             }}
           >
             {selectList.map((item) => (
@@ -154,7 +150,7 @@ export default function RoomsAdd() {
         <StSubmitBtn
           type="button"
           className="btn btn-primary"
-          onClick={(e) => {
+          onClick={() => {
             onSumitHandler();
           }}
         >

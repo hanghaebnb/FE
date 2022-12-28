@@ -39,6 +39,10 @@ function RoomCard({ room }) {
       dispatch(readRooms());
     }, 1000);
   }
+<<<<<<< HEAD
+=======
+  console.log(room);
+>>>>>>> feature/post
   return (
     <Card
       sx={{

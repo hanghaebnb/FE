@@ -10,7 +10,13 @@ function TopbarRight() {
     <StWrapper>
       <StNav>
         <StLink>
+<<<<<<< HEAD
           <StText>당신의 공간을 에어비앤비하세요</StText>
+=======
+          <StyledLink to="/rooms">
+            <StText>당신의 공간을 에어비앤비하세요</StText>
+          </StyledLink>
+>>>>>>> feature/post
         </StLink>
         <StIconBtn>
           <StIconWrapper>
@@ -45,7 +51,6 @@ const StLink = styled.div`
   text-align: inherit;
   padding: 12px;
   transition: color 250ms;
-
   appearance: none;
   /* color: inherit; */
   display: inline-block;
@@ -91,7 +96,6 @@ const StIconBtn = styled.button`
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
-
   &:focus,
   &:hover,
   &:visited,
