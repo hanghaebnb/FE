@@ -29,11 +29,15 @@ function RoomCard({ room }) {
   const dispatch = useDispatch();
   function like() {
     dispatch(addLike(room.id));
-    dispatch(readRooms());
+    setTimeout(() => {
+      dispatch(readRooms());
+    }, 1000);
   }
   function disLike() {
     dispatch(deleteLike(room.id));
-    dispatch(readRooms());
+    setTimeout(() => {
+      dispatch(readRooms());
+    }, 1000);
   }
 <<<<<<< HEAD
 =======

@@ -36,20 +36,32 @@ function Main() {
   const dispatch = useDispatch();
 
   function getHomes() {
-    dispatch(readRooms('type=home'));
+    dispatch(readRooms('?type=house'));
   }
 
   function getApart() {
-    dispatch(readRooms('type=apart'));
+    dispatch(readRooms('?type=apartment'));
   }
 
   function getHotel() {
-    dispatch(readRooms('type=hotel'));
+    dispatch(readRooms('?type=hotel'));
+  }
+
+  function getNonMemberHomes() {
+    dispatch(nonMemberReadRooms('?type=house'));
+  }
+
+  function getNonMemberApart() {
+    dispatch(nonMemberReadRooms('?type=apartment'));
+  }
+
+  function getNonMemberHotel() {
+    dispatch(nonMemberReadRooms('?type=hotel'));
   }
 
   const initMain = useCallback(() => {
-    if (cookies.accessToken) dispatch(readRooms());
-    else dispatch(nonMemberReadRooms());
+    if (cookies.accessToken) dispatch(readRooms(''));
+    else dispatch(nonMemberReadRooms(''));
   }, [dispatch, cookies]);
 
   useEffect(() => {
@@ -63,13 +75,25 @@ function Main() {
       }}
     >
       <Topbar />
-      <Button sx={{ mr: 2, mb: 2 }} variant="outlined" onClick={() => getHomes()}>
+      <Button
+        sx={{ mr: 2, mb: 2 }}
+        variant="outlined"
+        onClick={cookies.accessToken ? () => getHomes() : () => getNonMemberHomes()}
+      >
         주택
       </Button>
-      <Button sx={{ mr: 2, mb: 2 }} variant="outlined" onClick={() => getApart()}>
+      <Button
+        sx={{ mr: 2, mb: 2 }}
+        variant="outlined"
+        onClick={cookies.accessToken ? () => getApart() : () => getNonMemberApart()}
+      >
         아파트
       </Button>
-      <Button sx={{ mb: 2 }} variant="outlined">
+      <Button
+        sx={{ mb: 2 }}
+        variant="outlined"
+        onClick={cookies.accessToken ? () => getHotel() : () => getNonMemberHotel()}
+      >
         호텔
       </Button>
       <Container
