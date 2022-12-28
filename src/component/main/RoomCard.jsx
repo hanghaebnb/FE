@@ -39,6 +39,7 @@ function RoomCard({ room }) {
       dispatch(readRooms());
     }, 1000);
   }
+  console.log(room);
   return (
     <Card
       sx={{
