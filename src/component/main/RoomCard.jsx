@@ -35,10 +35,7 @@ function RoomCard({ room }) {
     dispatch(deleteLike(room.id));
     dispatch(readRooms());
   }
-<<<<<<< HEAD
-=======
   console.log(room);
->>>>>>> feature/post
   return (
     <Card
       sx={{
