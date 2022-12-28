@@ -1,0 +1,48 @@
+:root {
+  --font-black: 'GothicA1-Black';
+  --font-bold: 'GothicA1-Bold';
+  --font-extrabold: 'GothicA1-ExtraBold';
+  --font-extralight: 'GothicA1-ExtraLight';
+  --font-light: 'GothicA1-Light';
+  --font-medium: 'GothicA1-Medium';
+  --font-regular: 'GothicA1-Regular';
+  --font-semibold: 'GothicA1-SemiBold';
+  --font-thin: 'GothicA1-Thin';
+}
+
+@font-face {
+  font-family: 'GothicA1-Black';
+  src: url('./fonts/GothicA1-Black.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-Bold';
+  src: url('./fonts/GothicA1-Bold.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-ExtraBold';
+  src: url('./fonts/GothicA1-ExtraBold.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-ExtraLight';
+  src: url('./fonts/GothicA1-ExtraLight.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-Light';
+  src: url('./fonts/GothicA1-Light.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-Medium';
+  src: url('./fonts/GothicA1-Medium.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-Regular';
+  src: url('./fonts/GothicA1-Regular.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-SemiBold';
+  src: url('./fonts/GothicA1-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'GothicA1-Thin';
+  src: url('./fonts/GothicA1-Thin.ttf');
+}

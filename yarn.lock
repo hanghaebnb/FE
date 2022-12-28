@@ -1921,6 +1921,22 @@
   dependencies:
     "@babel/runtime" "^7.20.6"
 
+"@mui/joy@^5.0.0-alpha.59":
+  version "5.0.0-alpha.59"
+  resolved "https://registry.yarnpkg.com/@mui/joy/-/joy-5.0.0-alpha.59.tgz#9b3ca4eb6319a97c298ace8056e29f664ad786f3"
+  integrity sha512-ki4VMLF5GnW6UCkv6ufWAlQWci5+ppZJ3FaVPfgtWjyUI8wbz8lZh7UJ6PHAkHZw01gJVw5DA64BWdadKdPzRQ==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+    "@mui/base" "5.0.0-alpha.111"
+    "@mui/core-downloads-tracker" "^5.11.1"
+    "@mui/system" "^5.11.1"
+    "@mui/types" "^7.2.3"
+    "@mui/utils" "^5.11.1"
+    clsx "^1.2.1"
+    csstype "^3.1.1"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
+
 "@mui/material@^5.11.1":
   version "5.11.1"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.11.1.tgz#89ebc860abae0f146d9ac69b85baa691f09cfb47"
@@ -11719,6 +11735,11 @@ react-error-overlay@^6.0.11:
   version "6.0.11"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
+
+react-hooks@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-hooks/-/react-hooks-1.0.1.tgz#e62197c38cd8d0703060f791234f7f4698aa7c44"
+  integrity sha512-PXU08tw4SvKwkW99qgnyV98x939RCmBC6aXqALPQXPjKq6+6EoH79Rz4KdUozzlpSyWmn2IiEm0vh3p+79aP5w==
 
 react-icons@^4.7.1:
   version "4.7.1"

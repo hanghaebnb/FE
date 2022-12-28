@@ -1,8 +1,8 @@
 import React from 'react';
 import AccountForm from '../accountForm/AccountForm';
 
-function Login({ open }) {
-  return <AccountForm isLogin open={open} />;
+function Login({ open, handleClose }) {
+  return <AccountForm isLogin open={open} handleClose={() => handleClose()} />;
 }
 
 export default Login;

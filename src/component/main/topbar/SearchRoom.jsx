@@ -2,21 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchIcon from './SearchIcon';
 
-function Search() {
+function SearchAdd() {
   return (
     <StSearch>
-      <StWhereBtn>
-        <StWhereSpan>위치</StWhereSpan>
-        <StWhereText>어디든지</StWhereText>
-      </StWhereBtn>
-      <StSpanBar />
       <StWhereWeek>
-        <StWhereWeekText>언제든 일주일</StWhereWeekText>
+        <StWhereWeekText>검색 시작하기</StWhereWeekText>
       </StWhereWeek>
-      <StSpanBar />
-      <StAddGuest>
-        <StAddGuestText>게스트 추가</StAddGuestText>
-      </StAddGuest>
       <StIcon>
         <SearchIcon />
       </StIcon>
@@ -34,15 +25,16 @@ const StSearch = styled.div`
   color: #222222;
   display: inline-flex;
   max-width: 100%;
+  width: 300px;
   vertical-align: middle;
 `;
 
 const StWhereBtn = styled.button`
-  color: inherit;
+  /* color: inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
-  line-height: inherit;
+  line-height: inherit; */
   padding-left: 8px;
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
@@ -85,7 +77,6 @@ const StWhereText = styled.div`
   font-size: 14px;
   line-height: 18px;
   font-weight: 600;
-  font-family: var(--font-medium);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -95,9 +86,8 @@ const StWhereText = styled.div`
 
 const StWhereWeek = styled.button`
   background: transparent;
-  font-family: var(--font-medium);
   cursor: pointer;
-  padding: 0;
+  padding-right: 120px;
   text-align: inherit;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -138,10 +128,10 @@ const StWhereWeekText = styled.div`
 const StAddGuest = styled.button`
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
-  font-family: var(--font-extralight);
+
   background: transparent;
   cursor: pointer;
-  padding: 0;
+  padding-right: 120px;
   text-align: inherit;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -198,4 +188,4 @@ const StSpanBar = styled.span`
   height: 24px;
   width: 1px;
 `;
-export default Search;
+export default SearchAdd;
