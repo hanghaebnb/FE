@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TextField, Box, Modal, Typography } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,11 +7,18 @@ import { useCookies } from 'react-cookie';
 import { signUp, login } from '../../redux/modules/loginSlice';
 
 function AccountForm({ open, isLogin }) {
+  const contentInput = useRef();
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [modal, setModal] = useState(false);
+
+  const handler = () => {
+    setModal(!modal);
+    contentInput.current.value = '';
+  };
 
   function onEmailChangeHandler(event) {
     setEmail(event.target.value);
@@ -42,6 +49,10 @@ function AccountForm({ open, isLogin }) {
     dispatch(login({ ...account, setCookie }));
   }
 
+  const closeEventHandler = () => {
+    handler();
+  };
+
   return (
     <Modal
       open={open}
@@ -51,39 +62,52 @@ function AccountForm({ open, isLogin }) {
     >
       <StBox>
         <StHeader>
-          <StCloseIcon fontSize="25px" />
+          <StCloseIcon
+            fontSize="25px"
+            onClick={() => {
+              closeEventHandler();
+            }}
+          />
           {isLogin ? '로그인' : '회원가입'}
           <StDiv />
         </StHeader>
         <StInner>
           <StH3>에어비앤비에 오신 것을 환영합니다.</StH3>
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            value={email}
-            onChange={(event) => onEmailChangeHandler(event)}
-          />
-          {isLogin ? null : (
+          <StDivBox>
             <TextField
               fullWidth
               id="outlined-basic"
-              label="닉네임"
+              label="Email"
               variant="outlined"
-              value={nickname}
-              onChange={(event) => onNicknameChangeHandler(event)}
+              value={email}
+              onChange={(event) => onEmailChangeHandler(event)}
             />
+          </StDivBox>
+
+          {isLogin ? null : (
+            <StDivBox>
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                label="닉네임"
+                variant="outlined"
+                value={nickname}
+                onChange={(event) => onNicknameChangeHandler(event)}
+              />
+            </StDivBox>
           )}
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="비밀번호"
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={(event) => onPasswordChangeHandler(event)}
-          />
+          <StDivBox>
+            <TextField
+              fullWidth
+              id="outlined-basic"
+              label="비밀번호"
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={(event) => onPasswordChangeHandler(event)}
+            />
+          </StDivBox>
+
           <StSubmitBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
             계속
           </StSubmitBtn>
@@ -175,5 +199,10 @@ const StBox = styled(Box)`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+`;
+const StDivBox = styled.div`
+  text-align: center;
+  margin-top: 20px;
+  justify-content: 10px;
 `;
 export default AccountForm;
