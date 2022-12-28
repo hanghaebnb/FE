@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState, useRef } from 'react';
 import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
 import React, { useState, useRef } from 'react';
 import { TextField, Box, Modal, Typography } from '@mui/material';
-=======
-import React, { useEffect, useRef, useState } from 'react';
-import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
->>>>>>> feature/post
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,15 +16,6 @@ import {
   checkDuplicationEmail,
   checkDuplicationNickname,
 } from '../../redux/modules/loginSlice';
-<<<<<<< HEAD
-
-function AccountForm({ open, isLogin, handleClose }) {
-  const duplicate = useSelector((state) => state.login.duplicate);
-  const [checkEmail, setCheckEmail] = useState(false);
-  const [checkNick, setCheckNick] = useState(false);
-  const [disable, setDisable] = useState(true);
-=======
->>>>>>> feature/post
 
 function AccountForm({ open, isLogin, handleClose }) {
   const duplicate = useSelector((state) => state.login.duplicate);
@@ -80,6 +67,7 @@ function AccountForm({ open, isLogin, handleClose }) {
       password,
     };
     dispatch(signUp(account));
+    dispatch(clearDuplicate());
     handleClose();
   }
 
@@ -160,23 +148,20 @@ function AccountForm({ open, isLogin, handleClose }) {
               onChange={(event) => onPasswordChangeHandler(event)}
             />
           </StDivBox>
-<<<<<<< HEAD
-          <StSubmitBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
+          <StBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>계속</StBtn>
             계속
           </StBtn>
           <Grid container columns={9}>
-            <Grid sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
+            <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
               <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
             </Grid>
-            <Grid xs={4} sm={4} md={4}>
-=======
+            <Grid item xs={4} sm={4} md={4}>
           <StBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>계속</StBtn>
           <Grid container columns={9}>
             <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
               <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
             </Grid>
             <Grid item xs={4} sm={4} md={4}>
->>>>>>> feature/post
               <StBtn onClick={() => onCheckNick()}>닉네임 중복 확인</StBtn>
             </Grid>
           </Grid>
@@ -192,6 +177,7 @@ const StCloseIconBtn = styled(IconButton)`
 
 const StBtn = styled.button`
   cursor: pointer;
+  font-family: var(--font-light);
   display: inline-block !important;
   margin: 0px !important;
   position: relative !important;
@@ -218,10 +204,6 @@ const StBtn = styled.button`
   width: 100% !important;
   margin-bottom: 24px !important;
   margin-top: 16px !important;
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/post
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -236,6 +218,7 @@ const StInner = styled(Box)`
 `;
 
 const StH3 = styled.h3`
+  font-family: var(--font-medium);
   font-size: 22px !important;
   line-height: 26px !important;
   color: rgb(34, 34, 34) !important;
@@ -250,6 +233,7 @@ const StDiv = styled.div`
 `;
 
 const StHeader = styled.header`
+  font-family: var(--font-medium);
   height: 64px !important;
   display: flex !important;
   flex: 0 0 auto !important;
@@ -281,4 +265,5 @@ const StDivBox = styled.div`
   margin-top: 20px;
   justify-content: 10px;
 `;
+
 export default AccountForm;
