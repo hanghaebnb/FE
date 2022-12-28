@@ -60,13 +60,15 @@ function Main() {
   }
 
   const initMain = useCallback(() => {
-    if (cookies.accessToken) dispatch(readRooms(''));
+    if (cookies.accessToken) dispatch(readRooms('?page=0&size=10'));
     else dispatch(nonMemberReadRooms(''));
   }, [dispatch, cookies]);
 
   useEffect(() => {
     initMain();
   }, [initMain]);
+
+  // 무한스크롤
 
   return (
     <div

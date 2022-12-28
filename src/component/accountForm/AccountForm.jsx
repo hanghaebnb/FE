@@ -80,16 +80,14 @@ function AccountForm({ open, isLogin, handleClose }) {
   useEffect(() => {
     setCheckEmail(!duplicate.emailDuplicate);
     setCheckNick(!duplicate.nickDuplicate);
+    console.log(duplicate.emailDuplicate, duplicate.nickDuplicate);
   }, [duplicate.emailDuplicate, duplicate.nickDuplicate]);
 
   useEffect(() => {
+    // console.log(checkEmail, checkNick);
     if (checkEmail && checkNick) setDisable(false);
     else setDisable(true);
   }, [checkEmail, checkNick]);
-
-  const closeEventHandler = () => {
-    handler();
-  };
 
   return (
     <Modal
@@ -146,15 +144,22 @@ function AccountForm({ open, isLogin, handleClose }) {
               onChange={(event) => onPasswordChangeHandler(event)}
             />
           </StDivBox>
-          <StBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>계속</StBtn>
-          <Grid container columns={9}>
-            <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
-              <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
+          <StBtn
+            disabled={isLogin ? false : disable}
+            onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}
+          >
+            계속
+          </StBtn>
+          {isLogin ? null : (
+            <Grid container columns={9}>
+              <Grid item sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
+                <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
+              </Grid>
+              <Grid item xs={4} sm={4} md={4}>
+                <StBtn onClick={() => onCheckNick()}>닉네임 중복 확인</StBtn>
+              </Grid>
             </Grid>
-            <Grid item xs={4} sm={4} md={4}>
-              <StBtn onClick={() => onCheckNick()}>닉네임 중복 확인</StBtn>
-            </Grid>
-          </Grid>
+          )}
         </StInner>
       </StBox>
     </Modal>

@@ -36,7 +36,7 @@ export const checkDuplicationEmail = createAsyncThunk(
   'login/CHECK_DUPLICATION_EMAIL',
   async (payload, thunkAPI) => {
     try {
-      const response = await instance.post(`/api/users/email-check`, payload);
+      const response = await instance.post(`/api/users/email-check`, { email: payload });
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -48,7 +48,7 @@ export const checkDuplicationNickname = createAsyncThunk(
   'login/CHECK_DUPLICATION_NICKNAME',
   async (payload, thunkAPI) => {
     try {
-      const response = await instance.post(`/api/users/nick-check`, payload);
+      const response = await instance.post(`/api/users/nick-check`, { nickname: payload });
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -62,16 +62,16 @@ const loginSlice = createSlice({
   reducers: {
     clearDuplicate: (state) => ({
       ...state,
-      duplicate: { idDuplicate: true, nickDuplicate: true },
+      duplicate: { emailDuplicate: true, nickDuplicate: true },
     }),
     clearEmailDuplicate: (state) => ({
       ...state,
-      duplicate: { idDuplicate: true, nickDuplicate: state.duplicate.nickDuplicate },
+      duplicate: { emailDuplicate: true, nickDuplicate: state.duplicate.nickDuplicate },
     }),
     clearNickDuplicate: (state) => ({
       ...state,
       duplicate: {
-        idDuplicate: state.duplicate.idDuplicate,
+        emailDuplicate: state.duplicate.emailDuplicate,
         nickDuplicate: true,
       },
     }),
@@ -104,7 +104,7 @@ const loginSlice = createSlice({
     },
     [checkDuplicationEmail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.duplicate.emailDuplicate = action.payload;
+      state.duplicate.emailDuplicate = action.payload.result;
     },
     [checkDuplicationEmail.rejected]: (state, action) => {
       state.isLoading = false;
@@ -116,7 +116,7 @@ const loginSlice = createSlice({
     },
     [checkDuplicationNickname.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.duplicate.nickDuplicate = action.payload;
+      state.duplicate.nickDuplicate = action.payload.result;
     },
     [checkDuplicationNickname.rejected]: (state, action) => {
       state.isLoading = false;
