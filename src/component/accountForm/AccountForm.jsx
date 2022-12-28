@@ -80,7 +80,7 @@ function AccountForm({ open, isLogin, handleClose }) {
   useEffect(() => {
     setCheckEmail(!duplicate.emailDuplicate);
     setCheckNick(!duplicate.nickDuplicate);
-    console.log(duplicate.emailDuplicate, duplicate.nickDuplicate);
+    // console.log(duplicate.emailDuplicate, duplicate.nickDuplicate);
   }, [duplicate.emailDuplicate, duplicate.nickDuplicate]);
 
   useEffect(() => {

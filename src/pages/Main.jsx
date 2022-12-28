@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Container, Grid, List } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { useCookies } from 'react-cookie';
+import { useInView } from 'react-intersection-observer';
 import { nonMemberReadRooms, readRooms } from '../redux/modules/roomSlice';
 import Topbar from '../component/main/Topbar';
 import RoomCard from '../component/main/RoomCard';
@@ -33,6 +34,10 @@ const theme = createTheme({
 function Main() {
   const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
   const rooms = useSelector((state) => state.room.rooms);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const [ref, inView] = useInView();
   const dispatch = useDispatch();
 
   function getHomes() {
@@ -59,16 +64,23 @@ function Main() {
     dispatch(nonMemberReadRooms('?type=hotel'));
   }
 
-  const initMain = useCallback(() => {
-    if (cookies.accessToken) dispatch(readRooms('?page=0&size=10'));
-    else dispatch(nonMemberReadRooms(''));
-  }, [dispatch, cookies]);
+  // 무한스크롤
+  const getItems = useCallback(() => {
+    setLoading(true);
+    if (cookies.accessToken) dispatch(readRooms(`?page=${page}&size=10`));
+    else dispatch(nonMemberReadRooms(`?page=${page}&size=10`));
+    setLoading(false);
+  }, [dispatch, cookies, page]);
 
   useEffect(() => {
-    initMain();
-  }, [initMain]);
-
-  // 무한스크롤
+    getItems();
+  }, [getItems]);
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      setPage((prevState) => prevState + 1);
+    }
+  }, [inView, loading]);
 
   return (
     <div
@@ -112,11 +124,34 @@ function Main() {
             // justifyContent="center"
             alignItems="center"
           >
-            {rooms.map((room) => (
-              <Grid key={room.id} item xxs={60} xs={30} sm={20} md={15} lg={12} xl={10}>
-                {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
-                <RoomCard room={room} />
-              </Grid>
+            {rooms.map((room, idx) => (
+              <React.Fragment key={room.id}>
+                {rooms.length - 1 === idx ? (
+                  // <div className="room-item" ref={ref} key={room.id}>
+                  <Grid
+                    item
+                    key={room.id}
+                    xxs={60}
+                    xs={30}
+                    sm={20}
+                    md={15}
+                    lg={12}
+                    xl={10}
+                    ref={ref}
+                  >
+                    {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
+                    <RoomCard room={room} />
+                  </Grid>
+                ) : (
+                  // </div>
+                  // <div className="room-item" key={room.id}>
+                  <Grid item key={room.id} xxs={60} xs={30} sm={20} md={15} lg={12} xl={10}>
+                    {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
+                    <RoomCard room={room} />
+                  </Grid>
+                  // </div>
+                )}
+              </React.Fragment>
             ))}
           </Grid>
         </MuiThemeProvider>
