@@ -37,7 +37,7 @@ export const createRoom = createAsyncThunk('room/CREATE_ROOM', async (payload, t
 
 export const readRooms = createAsyncThunk('room/READ_ROOMS', async (payload, thunkAPI) => {
   try {
-    const response = await baseURL.get(`/api/rooms`);
+    const response = await baseURL.get(`/api/rooms${payload}`);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -48,7 +48,7 @@ export const nonMemberReadRooms = createAsyncThunk(
   'room/NON_MEMBER_READ_ROOMS',
   async (payload, thunkAPI) => {
     try {
-      const response = await instance.get(`/api/rooms/main`);
+      const response = await instance.get(`/api/rooms/main${payload}`);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

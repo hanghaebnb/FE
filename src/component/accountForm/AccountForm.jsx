@@ -167,6 +167,7 @@ const StCloseIconBtn = styled(IconButton)`
 
 const StBtn = styled.button`
   cursor: pointer;
+  font-family: var(--font-light);
   display: inline-block !important;
   margin: 0px !important;
   position: relative !important;
@@ -208,6 +209,7 @@ const StInner = styled(Box)`
 `;
 
 const StH3 = styled.h3`
+  font-family: var(--font-medium);
   font-size: 22px !important;
   line-height: 26px !important;
   color: rgb(34, 34, 34) !important;
@@ -222,6 +224,7 @@ const StDiv = styled.div`
 `;
 
 const StHeader = styled.header`
+  font-family: var(--font-medium);
   height: 64px !important;
   display: flex !important;
   flex: 0 0 auto !important;
