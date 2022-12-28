@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Login from '../../login/Login';
@@ -6,29 +6,22 @@ import LangIcon from './LangIcon';
 import UserInfo from './UserInfo';
 
 function TopbarRight() {
-  const [open, setOpen] = useState(false);
-  function handleOpen() {
-    setOpen(true);
-  }
   return (
-    <>
-      <StWrapper>
-        <StNav>
-          <StLink>
-            <StyledLink to="/rooms">
-              <StText>당신의 공간을 에어비앤비하세요</StText>
-            </StyledLink>
-          </StLink>
-          <StIconBtn onClick={() => handleOpen()}>
-            <StIconWrapper>
-              <LangIcon />
-            </StIconWrapper>
-          </StIconBtn>
-          <UserInfo />
-        </StNav>
-      </StWrapper>
-      <Login open={open} />
-    </>
+    <StWrapper>
+      <StNav>
+        <StLink>
+          <StyledLink to="/rooms">
+            <StText>당신의 공간을 에어비앤비하세요</StText>
+          </StyledLink>
+        </StLink>
+        <StIconBtn>
+          <StIconWrapper>
+            <LangIcon />
+          </StIconWrapper>
+        </StIconBtn>
+        <UserInfo />
+      </StNav>
+    </StWrapper>
   );
 }
 
@@ -54,7 +47,6 @@ const StLink = styled.div`
   text-align: inherit;
   padding: 12px;
   transition: color 250ms;
-
   appearance: none;
   /* color: inherit; */
   display: inline-block;
@@ -72,6 +64,7 @@ const StLink = styled.div`
 `;
 
 const StText = styled.div`
+  font-family: var(--font-medium);
   align-items: center;
   display: flex;
   height: 100%;
@@ -93,12 +86,12 @@ const StIconBtn = styled.button`
   border: 0;
   cursor: pointer;
   margin: 0;
+  margin-right: 8px;
   text-align: inherit;
   padding: 12px;
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
-
   &:focus,
   &:hover,
   &:visited,

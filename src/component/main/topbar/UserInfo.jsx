@@ -1,25 +1,75 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Box, Modal, Typography } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Divider } from '@mui/material';
+import { useCookies } from 'react-cookie';
 import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
 import SignUp from '../../signup/SignUp';
+import Login from '../../login/Login';
 
 function UserInfo() {
-  const [open, setOpen] = useState(false);
-  function handleOpen() {
-    setOpen(true);
+  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
+  const open = Boolean(anchorEl);
+
+  function handleSignUpOpen() {
+    setSignUpOpen(true);
+    setAnchorEl(null);
+  }
+  function handleSignUpClose() {
+    setSignUpOpen(false);
+  }
+  function handleLoginOpen() {
+    setLoginOpen(true);
+    setAnchorEl(null);
+  }
+  function handleLoginClose() {
+    setLoginOpen(false);
+  }
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  function logout() {
+    removeCookies('accessToken');
   }
   return (
     <>
       <StUserInfoDiv>
-        <StUserInfoBtn onClick={() => handleOpen()}>
+        <StUserInfoBtn
+          id="basic-button"
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={(event) => handleClick(event)}
+        >
           <UserMenuIcon />
           <UserIcon />
         </StUserInfoBtn>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem onClick={cookies.accessToken ? logout : handleLoginOpen}>
+            {cookies.accessToken ? '로그아웃' : '로그인'}
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={() => handleSignUpOpen()}>회원가입</MenuItem>
+        </Menu>
       </StUserInfoDiv>
-      <SignUp open={open} />
+      <SignUp open={signUpOpen} handleClose={() => handleSignUpClose()} />
+      <Login open={loginOpen} handleClose={() => handleLoginClose()} />
     </>
   );
 }
@@ -39,7 +89,6 @@ const StUserInfoBtn = styled.div`
   border: 1px solid #dddddd;
   border-radius: 21px;
   transition: box-shadow 0.2s ease;
-
   appearance: none;
   /* font-family: inherit;
     font-size: inherit;
