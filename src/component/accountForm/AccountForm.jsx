@@ -1,28 +1,54 @@
-import React, { useState } from 'react';
-import { TextField, Box, Modal, Typography, IconButton } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { signUp, login } from '../../redux/modules/loginSlice';
+import {
+  signUp,
+  login,
+  clearEmailDuplicate,
+  clearNickDuplicate,
+  clearDuplicate,
+  checkDuplicationEmail,
+  checkDuplicationNickname,
+} from '../../redux/modules/loginSlice';
 
 function AccountForm({ open, isLogin, handleClose }) {
+  const duplicate = useSelector((state) => state.login.duplicate);
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkNick, setCheckNick] = useState(false);
+  const [disable, setDisable] = useState(true);
+
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies();
+
+  const dispatch = useDispatch();
 
   function onEmailChangeHandler(event) {
     setEmail(event.target.value);
+    setCheckEmail(false);
+    dispatch(clearEmailDuplicate());
   }
 
   function onNicknameChangeHandler(event) {
     setNickName(event.target.value);
+    setCheckNick(false);
+    dispatch(clearNickDuplicate());
   }
 
   function onPasswordChangeHandler(event) {
     setPassword(event.target.value);
+  }
+
+  function onCheckEmail() {
+    dispatch(checkDuplicationEmail(email));
+  }
+
+  function onCheckNick() {
+    dispatch(checkDuplicationNickname(nickname));
   }
 
   function onSubmitHandler() {
@@ -32,6 +58,7 @@ function AccountForm({ open, isLogin, handleClose }) {
       password,
     };
     dispatch(signUp(account));
+    handleClose();
   }
 
   function onLoginHandler() {
@@ -40,7 +67,17 @@ function AccountForm({ open, isLogin, handleClose }) {
       password,
     };
     dispatch(login({ ...account, setCookie }));
+    handleClose();
   }
+  useEffect(() => {
+    setCheckEmail(!duplicate.emailDuplicate);
+    setCheckNick(!duplicate.nickDuplicate);
+  }, [duplicate.emailDuplicate, duplicate.nickDuplicate]);
+
+  useEffect(() => {
+    if (checkEmail && checkNick) setDisable(false);
+    else setDisable(true);
+  }, [checkEmail, checkNick]);
 
   return (
     <Modal
@@ -90,9 +127,17 @@ function AccountForm({ open, isLogin, handleClose }) {
             value={password}
             onChange={(event) => onPasswordChangeHandler(event)}
           />
-          <StSubmitBtn onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
+          <StBtn disabled onClick={isLogin ? () => onLoginHandler() : () => onSubmitHandler()}>
             계속
-          </StSubmitBtn>
+          </StBtn>
+          <Grid container columns={9}>
+            <Grid sx={{ marginRight: '57px' }} xs={4} sm={4} md={4}>
+              <StBtn onClick={() => onCheckEmail()}>이메일 중복 확인</StBtn>
+            </Grid>
+            <Grid xs={4} sm={4} md={4}>
+              <StBtn onClick={() => onCheckNick()}>닉네임 중복 확인</StBtn>
+            </Grid>
+          </Grid>
         </StInner>
       </StBox>
     </Modal>
@@ -103,8 +148,8 @@ const StCloseIconBtn = styled(IconButton)`
   text-align: left !important;
 `;
 
-const StSubmitBtn = styled.button`
-  cursor: pointer !important;
+const StBtn = styled.button`
+  cursor: pointer;
   display: inline-block !important;
   margin: 0px !important;
   position: relative !important;
@@ -126,11 +171,16 @@ const StSubmitBtn = styled.button`
     rgb(230, 30, 77) 0%,
     rgb(227, 28, 95) 50%,
     rgb(215, 4, 102) 100%
-  ) !important;
+  );
   color: rgb(255, 255, 255) !important;
   width: 100% !important;
   margin-bottom: 24px !important;
   margin-top: 16px !important;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;
 
 const StInner = styled(Box)`

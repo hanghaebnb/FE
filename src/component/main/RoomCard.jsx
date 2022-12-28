@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,8 +7,9 @@ import { AspectRatio } from '@mui/joy';
 import { Grid } from '@mui/material';
 import { withStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import LikeButton from './card/LikeButton';
-import { addLike, deleteLike } from '../../redux/modules/roomSlice';
+import { addLike, deleteLike, readRooms } from '../../redux/modules/roomSlice';
 
 const styles = {
   cardcontent: {
@@ -20,12 +21,19 @@ const styles = {
 };
 
 function RoomCard({ room }) {
+  // const [, updateState] = useState();
+  // const forceUpdate = useCallback(() => {
+  //   updateState({});
+  //   console.log('update');
+  // }, []);
   const dispatch = useDispatch();
   function like() {
     dispatch(addLike(room.id));
+    dispatch(readRooms());
   }
   function disLike() {
     dispatch(deleteLike(room.id));
+    dispatch(readRooms());
   }
   return (
     <Card

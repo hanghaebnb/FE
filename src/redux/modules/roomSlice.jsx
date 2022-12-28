@@ -1,18 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { Cookies } from 'react-cookie';
-import React from 'react';
 import { baseURL, instance } from '../../core/api/axios';
 
 const initialState = {
   rooms: [],
   room: {
-    title: '제목',
-    description: '내용',
-    price: '150000',
+    title: '',
+    description: '',
+    price: 0,
     address: '',
-    type: 'hotel',
-    userId: '0',
+    type: '',
+    userId: 0,
     likeCheck: false,
   },
   isLoading: false,

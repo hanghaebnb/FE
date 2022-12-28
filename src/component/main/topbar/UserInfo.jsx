@@ -4,15 +4,19 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Divider } from '@mui/material';
 import { useCookies } from 'react-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
 import SignUp from '../../signup/SignUp';
 import Login from '../../login/Login';
+// import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
 
 function UserInfo() {
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  // const { signUpOpen, loginOpen, anchorEl } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
   const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
   const open = Boolean(anchorEl);
 

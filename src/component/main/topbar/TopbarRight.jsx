@@ -61,6 +61,7 @@ const StLink = styled.div`
 `;
 
 const StText = styled.div`
+  font-family: var(--font-medium);
   align-items: center;
   display: flex;
   height: 100%;
@@ -82,6 +83,7 @@ const StIconBtn = styled.button`
   border: 0;
   cursor: pointer;
   margin: 0;
+  margin-right: 8px;
   text-align: inherit;
   padding: 12px;
 `;

@@ -38,11 +38,11 @@ const StSearch = styled.div`
 `;
 
 const StWhereBtn = styled.button`
-  /* color: inherit;
+  color: inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
-  line-height: inherit; */
+  line-height: inherit;
   padding-left: 8px;
   border-top-left-radius: inherit;
   border-bottom-left-radius: inherit;
@@ -85,6 +85,7 @@ const StWhereText = styled.div`
   font-size: 14px;
   line-height: 18px;
   font-weight: 600;
+  font-family: var(--font-medium);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -94,6 +95,7 @@ const StWhereText = styled.div`
 
 const StWhereWeek = styled.button`
   background: transparent;
+  font-family: var(--font-medium);
   cursor: pointer;
   padding: 0;
   text-align: inherit;
@@ -136,7 +138,7 @@ const StWhereWeekText = styled.div`
 const StAddGuest = styled.button`
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
-
+  font-family: var(--font-extralight);
   background: transparent;
   cursor: pointer;
   padding: 0;
