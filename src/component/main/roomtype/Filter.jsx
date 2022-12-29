@@ -5,9 +5,11 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { initPage, initRooms } from '../../../redux/modules/roomSlice';
 
-function SetPrice({ open, handleClose, price }) {
+function Filter({ open, handleClose, query }) {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
+  const [keyWord, setKeyWord] = useState('');
+
   const [disable, setDisable] = useState(true);
   const dispatch = useDispatch();
 
@@ -25,13 +27,17 @@ function SetPrice({ open, handleClose, price }) {
     else setMaxPrice(event.target.value * 1);
   }
 
+  function onKeyWordChangeHandler(event) {
+    setKeyWord(event.target.value);
+  }
+
   useEffect(() => {
     if (minPrice > maxPrice) setDisable(true);
     else setDisable(false);
   }, [minPrice, maxPrice]);
 
   function searchPrice() {
-    price.current = `&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    query.current = `&minPrice=${minPrice}&maxPrice=${maxPrice}&keyword=${keyWord}`;
     dispatch(initRooms());
     dispatch(initPage());
     setMinPrice(0);
@@ -85,6 +91,15 @@ function SetPrice({ open, handleClose, price }) {
               />
             </Grid>
           </Grid>
+          <div style={{ paddingTop: '18px' }}>
+            <TextField
+              sx={{ width: '100%' }}
+              value={keyWord}
+              onChange={(event) => onKeyWordChangeHandler(event)}
+              label="검색"
+              variant="outlined"
+            />
+          </div>
         </StPrice>
         <StSubmitBtn onClick={() => searchPrice()} disabled={disable}>
           검색
@@ -183,4 +198,4 @@ const StCloseIconBtn = styled(IconButton)`
   text-align: left !important;
 `;
 
-export default SetPrice;
+export default Filter;

@@ -43,6 +43,7 @@ function UserInfo() {
   };
   function logout() {
     removeCookies('accessToken');
+    handleClose();
     dispatch(initRooms());
     dispatch(initPage());
   }
@@ -71,12 +72,8 @@ function UserInfo() {
           <MenuItem onClick={cookies.accessToken ? () => logout() : () => handleLoginOpen()}>
             {cookies.accessToken ? '로그아웃' : '로그인'}
           </MenuItem>
-          {cookies.accessToken ? null : (
-            <>
-              <Divider />
-              <MenuItem onClick={() => handleSignUpOpen()}>회원가입</MenuItem>
-            </>
-          )}
+          <Divider />
+          <MenuItem onClick={() => handleSignUpOpen()}>회원가입</MenuItem>
         </Menu>
       </StUserInfoDiv>
       <SignUp open={signUpOpen} handleClose={() => handleSignUpClose()} />

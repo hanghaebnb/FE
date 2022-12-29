@@ -82,21 +82,25 @@ const loginSlice = createSlice({
     },
     [signUp.fulfilled]: (state, action) => {
       state.isLoading = false;
+      alert('회원가입 성공');
     },
     [signUp.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      alert('회원가입 실패');
     },
 
-    [signUp.pending]: (state) => {
+    [login.pending]: (state) => {
       state.isLoading = true;
     },
-    [signUp.fulfilled]: (state, action) => {
+    [login.fulfilled]: (state, action) => {
       state.isLoading = false;
+      alert('로그인 성공');
     },
-    [signUp.rejected]: (state, action) => {
+    [login.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      alert('로그인 실패');
     },
 
     [checkDuplicationEmail.pending]: (state) => {
@@ -105,6 +109,8 @@ const loginSlice = createSlice({
     [checkDuplicationEmail.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.duplicate.emailDuplicate = action.payload.result;
+      if (action.payload.result) alert('중복된 이메일입니다.');
+      else alert('사용 가능한 이메일입니다.');
     },
     [checkDuplicationEmail.rejected]: (state, action) => {
       state.isLoading = false;
@@ -117,6 +123,8 @@ const loginSlice = createSlice({
     [checkDuplicationNickname.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.duplicate.nickDuplicate = action.payload.result;
+      if (action.payload.result) alert('중복된 닉네임입니다.');
+      else alert('사용 가능한 닉네임입니다.');
     },
     [checkDuplicationNickname.rejected]: (state, action) => {
       state.isLoading = false;

@@ -27,6 +27,10 @@ function AccountForm({ open, isLogin, handleClose }) {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
   const [modal, setModal] = useState(false);
 
+  const passwordCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+  const emailCheck =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   const handler = () => {
     setModal(!modal);
     contentInput.current.value = '';
@@ -51,14 +55,28 @@ function AccountForm({ open, isLogin, handleClose }) {
   }
 
   function onCheckEmail() {
+    if (!emailCheck.test(email)) {
+      alert('올바른 형식의 이메일 주소여야 합니다.');
+      dispatch(clearEmailDuplicate());
+      return;
+    }
     dispatch(checkDuplicationEmail(email));
   }
 
   function onCheckNick() {
+    if (nickname === '') {
+      alert('닉네임은 필수 입력 값입니다.');
+      dispatch(clearEmailDuplicate());
+      return;
+    }
     dispatch(checkDuplicationNickname(nickname));
   }
 
   function onSubmitHandler() {
+    if (!passwordCheck.test(password)) {
+      alert('올바른 형식의 비밀번호여야 합니다.');
+      return;
+    }
     const account = {
       email,
       nickname,
@@ -96,9 +114,9 @@ function AccountForm({ open, isLogin, handleClose }) {
 
   useEffect(() => {
     // console.log(checkEmail, checkNick);
-    if (checkEmail && checkNick) setDisable(false);
+    if (checkEmail && checkNick && passwordCheck.test(password)) setDisable(false);
     else setDisable(true);
-  }, [checkEmail, checkNick]);
+  }, [checkEmail, checkNick, password]);
 
   return (
     <Modal
@@ -152,6 +170,11 @@ function AccountForm({ open, isLogin, handleClose }) {
               variant="outlined"
               type="password"
               value={password}
+              helperText={
+                isLogin
+                  ? ''
+                  : '비밀번호는 영문, 숫자, 특수기호가 적어도 1개 이상씩 포함 된 8자 ~ 20자여야 합니다.'
+              }
               onChange={(event) => onPasswordChangeHandler(event)}
             />
           </StDivBox>

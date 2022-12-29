@@ -44,7 +44,7 @@ function Main() {
   const page = useSelector((state) => state.room.page);
   const [loading, setLoading] = useState(false);
   const roomType = useRef('');
-  const price = useRef('');
+  const query = useRef('');
 
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
@@ -69,18 +69,18 @@ function Main() {
 
   function clear() {
     roomType.current = '';
-    price.current = '';
+    query.current = '';
     dispatch(initRooms());
     dispatch(initPage());
   }
 
   // 무한스크롤
   const getItems = useCallback(() => {
-    console.log(`?page=${page}&size=10${roomType.current}${price.current}`);
+    console.log(`?page=${page}&size=10${roomType.current}${query.current}`);
     setLoading(true);
     if (cookies.accessToken)
-      dispatch(readRooms(`?page=${page}&size=10${roomType.current}${price.current}`));
-    else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}${price.current}`));
+      dispatch(readRooms(`?page=${page}&size=10${roomType.current}${query.current}`));
+    else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}${query.current}`));
     setLoading(false);
   }, [dispatch, page]);
 
@@ -106,7 +106,7 @@ function Main() {
         getHomes={() => getHomes()}
         getApart={() => getApart()}
         getHotel={() => getHotel()}
-        price={price}
+        query={query}
         clear={() => clear()}
       />
       <Container

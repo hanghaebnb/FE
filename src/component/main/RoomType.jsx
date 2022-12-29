@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { IconButton } from '@mui/material';
 import FilterIcon from './roomtype/FilterIcon';
-import SetPrice from './roomtype/SetPrice';
+import Filter from './roomtype/Filter';
 
-function RoomType({ getHomes, getApart, getHotel, price, clear }) {
+function RoomType({ getHomes, getApart, getHotel, query, clear }) {
   const [open, setOpen] = useState(false);
 
   function handleOpen() {
@@ -18,15 +18,15 @@ function RoomType({ getHomes, getApart, getHotel, price, clear }) {
   return (
     <>
       <StRoomTypeContainer>
-        <StBtn onClick={() => getHomes()}>
+        <StBtn onClick={() => clear()}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <IconButton
+            {/* <IconButton
               sx={{ width: '24px', height: '24px', marginBottom: '8px' }}
               disableRipple
               onClick={() => clear()}
-            >
-              <RefreshIcon />
-            </IconButton>
+            > */}
+            <RefreshIcon sx={{ width: '24px', height: '24px', marginBottom: '8px' }} />
+            {/* </IconButton> */}
             <StSpan>초기화</StSpan>
           </div>
         </StBtn>
@@ -209,7 +209,7 @@ function RoomType({ getHomes, getApart, getHotel, price, clear }) {
           </StFilterBtn>
         </StFilterDiv>
       </StRoomTypeContainer>
-      <SetPrice open={open} handleClose={() => handleClose()} price={price} />
+      <Filter open={open} handleClose={() => handleClose()} query={query} />
     </>
   );
 }
