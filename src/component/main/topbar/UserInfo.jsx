@@ -96,7 +96,6 @@ const StUserInfoBtn = styled.div`
   border: 1px solid #dddddd;
   border-radius: 21px;
   transition: box-shadow 0.2s ease;
-
   appearance: none;
   /* font-family: inherit;
     font-size: inherit;

@@ -36,6 +36,7 @@ function RoomCard({ room }) {
   function disLike() {
     dispatch(deleteLike(room.id));
   }
+  console.log(room);
   return (
     <Card
       sx={{
