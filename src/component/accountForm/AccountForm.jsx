@@ -1,8 +1,5 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { TextField, Box, Modal, Typography, IconButton, Grid } from '@mui/material';
-import React, { useState, useRef } from 'react';
-import { TextField, Box, Modal, Typography } from '@mui/material';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
@@ -85,6 +82,7 @@ function AccountForm({ open, isLogin, handleClose }) {
     dispatch(initRooms());
     dispatch(initPage());
   }, [cookies]);
+
   useEffect(() => {
     setCheckEmail(!duplicate.emailDuplicate);
     setCheckNick(!duplicate.nickDuplicate);

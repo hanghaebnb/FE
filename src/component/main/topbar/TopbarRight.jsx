@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Login from '../../login/Login';
 import LangIcon from './LangIcon';
 import UserInfo from './UserInfo';
 
@@ -10,13 +9,9 @@ function TopbarRight() {
     <StWrapper>
       <StNav>
         <StLink>
-<<<<<<< HEAD
-          <StText>당신의 공간을 에어비앤비하세요</StText>
-=======
           <StyledLink to="/rooms">
             <StText>당신의 공간을 에어비앤비하세요</StText>
           </StyledLink>
->>>>>>> feature/post
         </StLink>
         <StIconBtn>
           <StIconWrapper>
@@ -101,6 +96,7 @@ const StyledLink = styled(Link)`
   &:visited,
   &:link,
   &:active {
+    color: #222222;
     text-decoration: none;
   }
 `;

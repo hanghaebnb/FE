@@ -6,7 +6,13 @@ import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { useCookies } from 'react-cookie';
 import { useInView } from 'react-intersection-observer';
-import { increasePage, nonMemberReadRooms, readRooms } from '../redux/modules/roomSlice';
+import {
+  increasePage,
+  initPage,
+  initRooms,
+  nonMemberReadRooms,
+  readRooms,
+} from '../redux/modules/roomSlice';
 import Topbar from '../component/main/Topbar';
 import RoomCard from '../component/main/RoomCard';
 import RoomType from '../component/main/RoomType';
@@ -37,44 +43,34 @@ function Main() {
   const rooms = useSelector((state) => state.room.rooms);
   const page = useSelector((state) => state.room.page);
   const [loading, setLoading] = useState(false);
-  // const roomType = useRef('');
+  const roomType = useRef('');
 
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
 
   function getHomes() {
-    dispatch(readRooms('?type=house'));
+    roomType.current = '&type=house';
+    dispatch(initRooms());
+    dispatch(initPage());
   }
 
   function getApart() {
-    dispatch(readRooms('?type=apartment'));
+    roomType.current = '&type=apartment';
+    dispatch(initRooms());
+    dispatch(initPage());
   }
 
   function getHotel() {
-    dispatch(readRooms('?type=hotel'));
-  }
-
-  // function getNonMemberItems() {
-  //   setPage(0);
-  // }
-
-  function getNonMemberHomes() {
-    dispatch(nonMemberReadRooms('?type=house'));
-  }
-
-  function getNonMemberApart() {
-    dispatch(nonMemberReadRooms('?type=apartment'));
-  }
-
-  function getNonMemberHotel() {
-    dispatch(nonMemberReadRooms('?type=hotel'));
+    roomType.current = '&type=hotel';
+    dispatch(initRooms());
+    dispatch(initPage());
   }
 
   // 무한스크롤
   const getItems = useCallback(() => {
     setLoading(true);
-    if (cookies.accessToken) dispatch(readRooms(`?page=${page}&size=10`));
-    else dispatch(nonMemberReadRooms(`?page=${page}&size=10`));
+    if (cookies.accessToken) dispatch(readRooms(`?page=${page}&size=10${roomType.current}`));
+    else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}`));
     setLoading(false);
   }, [dispatch, page]);
 
@@ -96,60 +92,21 @@ function Main() {
       }}
     >
       <Topbar />
-      {/* <Divider
-        sx={{
-          '&::before, &::after': {
-            borderColor: 'secondary.light',
-          },
-        }}
-      /> */}
-      <RoomType />
-      {/* <Button
-        sx={{ mr: 2, mb: 2 }}
-        variant="outlined"
-        onClick={cookies.accessToken ? () => getItems() : () => getNonMemberItems()}
-      >
-        전체
-      </Button> */}
-      {/* <Button
-        sx={{ mr: 2, mb: 2 }}
-        variant="outlined"
-        onClick={cookies.accessToken ? () => getHomes() : () => getNonMemberHomes()}
-      >
-        주택
-      </Button>
-      <Button
-        sx={{ mr: 2, mb: 2 }}
-        variant="outlined"
-        onClick={cookies.accessToken ? () => getApart() : () => getNonMemberApart()}
-      >
-        아파트
-      </Button>
-      <Button
-        sx={{ mb: 2 }}
-        variant="outlined"
-        onClick={cookies.accessToken ? () => getHotel() : () => getNonMemberHotel()}
-      >
-        호텔
-      </Button> */}
+      <RoomType
+        getHomes={() => getHomes()}
+        getApart={() => getApart()}
+        getHotel={() => getHotel()}
+      />
       <Container
         maxWidth="100%"
         sx={{ mr: 0, ml: 0, paddingInlineStart: '80px', paddingInlineEnd: '80px' }}
         disableGutters
       >
         <MuiThemeProvider theme={theme}>
-          <Grid
-            container
-            spacing={3}
-            columns={60}
-            direction="row"
-            // justifyContent="center"
-            alignItems="center"
-          >
+          <Grid container spacing={3} columns={60} direction="row" alignItems="center">
             {rooms.map((room, idx) => (
               <React.Fragment key={room.id}>
                 {rooms.length - 1 === idx ? (
-                  // <div className="room-item" ref={ref} key={room.id}>
                   <Grid
                     item
                     key={room.id}
@@ -161,17 +118,12 @@ function Main() {
                     xl={10}
                     ref={ref}
                   >
-                    {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
                     <RoomCard room={room} />
                   </Grid>
                 ) : (
-                  // </div>
-                  // <div className="room-item" key={room.id}>
                   <Grid item key={room.id} xxs={60} xs={30} sm={20} md={15} lg={12} xl={10}>
-                    {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
                     <RoomCard room={room} />
                   </Grid>
-                  // </div>
                 )}
               </React.Fragment>
             ))}

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function RoomType() {
+function RoomType({ getHomes, getApart, getHotel }) {
   return (
     <StRoomTypeContainer>
-      <StBtn>
+      <StBtn onClick={() => getHomes()}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <img
             style={{ width: '24px', height: '24px', marginBottom: '8px' }}
@@ -14,7 +14,7 @@ function RoomType() {
           <StSpan>주택</StSpan>
         </div>
       </StBtn>
-      <StBtn>
+      <StBtn onClick={() => getApart()}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <img
             style={{ width: '24px', height: '24px', marginBottom: '8px' }}
@@ -24,7 +24,7 @@ function RoomType() {
           <StSpan>아파트</StSpan>
         </div>
       </StBtn>
-      <StBtn>
+      <StBtn onClick={() => getHotel()}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <img
             style={{ width: '24px', height: '24px', marginBottom: '8px' }}
