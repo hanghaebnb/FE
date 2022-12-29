@@ -39,7 +39,6 @@ function RoomCard({ room, locationHandler }) {
         boxShadow: 'none',
         mb: '16px',
       }}
-      onClick={() => locationHandler(id)}
     >
       <AspectRatio sx={{ mb: '12px' }} ratio="20/19">
         <CardMedia
