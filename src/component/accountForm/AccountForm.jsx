@@ -16,6 +16,7 @@ import {
   checkDuplicationEmail,
   checkDuplicationNickname,
 } from '../../redux/modules/loginSlice';
+import { initPage, initRooms } from '../../redux/modules/roomSlice';
 
 function AccountForm({ open, isLogin, handleClose }) {
   const duplicate = useSelector((state) => state.login.duplicate);
@@ -26,7 +27,7 @@ function AccountForm({ open, isLogin, handleClose }) {
   const [email, setEmail] = useState('');
   const [nickname, setNickName] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
   const [modal, setModal] = useState(false);
 
   const handler = () => {
@@ -72,13 +73,18 @@ function AccountForm({ open, isLogin, handleClose }) {
   }
 
   function onLoginHandler() {
+    handleClose();
     const account = {
       email,
       password,
     };
     dispatch(login({ ...account, setCookie }));
-    handleClose();
   }
+
+  useEffect(() => {
+    dispatch(initRooms());
+    dispatch(initPage());
+  }, [cookies]);
   useEffect(() => {
     setCheckEmail(!duplicate.emailDuplicate);
     setCheckNick(!duplicate.nickDuplicate);

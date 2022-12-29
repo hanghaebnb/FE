@@ -1,14 +1,15 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Button, Container, Grid, List } from '@mui/material';
+import { Button, Container, Divider, Grid, List } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { useCookies } from 'react-cookie';
 import { useInView } from 'react-intersection-observer';
-import { nonMemberReadRooms, readRooms } from '../redux/modules/roomSlice';
+import { increasePage, nonMemberReadRooms, readRooms } from '../redux/modules/roomSlice';
 import Topbar from '../component/main/Topbar';
 import RoomCard from '../component/main/RoomCard';
+import RoomType from '../component/main/RoomType';
 
 const BREAKPOINTS = {
   xxs: 0,
@@ -34,8 +35,9 @@ const theme = createTheme({
 function Main() {
   const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
   const rooms = useSelector((state) => state.room.rooms);
-  const [page, setPage] = useState(0);
+  const page = useSelector((state) => state.room.page);
   const [loading, setLoading] = useState(false);
+  // const roomType = useRef('');
 
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
@@ -51,6 +53,10 @@ function Main() {
   function getHotel() {
     dispatch(readRooms('?type=hotel'));
   }
+
+  // function getNonMemberItems() {
+  //   setPage(0);
+  // }
 
   function getNonMemberHomes() {
     dispatch(nonMemberReadRooms('?type=house'));
@@ -70,15 +76,16 @@ function Main() {
     if (cookies.accessToken) dispatch(readRooms(`?page=${page}&size=10`));
     else dispatch(nonMemberReadRooms(`?page=${page}&size=10`));
     setLoading(false);
-  }, [dispatch, cookies, page]);
+  }, [dispatch, page]);
 
   useEffect(() => {
     getItems();
   }, [getItems]);
+
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
     if (inView && !loading) {
-      setPage((prevState) => prevState + 1);
+      dispatch(increasePage(page));
     }
   }, [inView, loading]);
 
@@ -89,7 +96,22 @@ function Main() {
       }}
     >
       <Topbar />
-      <Button
+      {/* <Divider
+        sx={{
+          '&::before, &::after': {
+            borderColor: 'secondary.light',
+          },
+        }}
+      /> */}
+      <RoomType />
+      {/* <Button
+        sx={{ mr: 2, mb: 2 }}
+        variant="outlined"
+        onClick={cookies.accessToken ? () => getItems() : () => getNonMemberItems()}
+      >
+        전체
+      </Button> */}
+      {/* <Button
         sx={{ mr: 2, mb: 2 }}
         variant="outlined"
         onClick={cookies.accessToken ? () => getHomes() : () => getNonMemberHomes()}
@@ -109,7 +131,7 @@ function Main() {
         onClick={cookies.accessToken ? () => getHotel() : () => getNonMemberHotel()}
       >
         호텔
-      </Button>
+      </Button> */}
       <Container
         maxWidth="100%"
         sx={{ mr: 0, ml: 0, paddingInlineStart: '80px', paddingInlineEnd: '80px' }}

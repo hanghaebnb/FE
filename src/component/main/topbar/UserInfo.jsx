@@ -4,28 +4,20 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Divider } from '@mui/material';
 import { useCookies } from 'react-cookie';
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
-=======
->>>>>>> feature/post
 import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
 import SignUp from '../../signup/SignUp';
 import Login from '../../login/Login';
-<<<<<<< HEAD
+import { initPage, initRooms } from '../../../redux/modules/roomSlice';
 // import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
-=======
->>>>>>> feature/post
 
 function UserInfo() {
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-<<<<<<< HEAD
   // const { signUpOpen, loginOpen, anchorEl } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
-=======
->>>>>>> feature/post
   const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
   const open = Boolean(anchorEl);
 
@@ -51,6 +43,8 @@ function UserInfo() {
   };
   function logout() {
     removeCookies('accessToken');
+    dispatch(initRooms());
+    dispatch(initPage());
   }
   return (
     <>
@@ -74,7 +68,7 @@ function UserInfo() {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={cookies.accessToken ? logout : handleLoginOpen}>
+          <MenuItem onClick={cookies.accessToken ? () => logout() : () => handleLoginOpen()}>
             {cookies.accessToken ? '로그아웃' : '로그인'}
           </MenuItem>
           <Divider />

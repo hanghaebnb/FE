@@ -21,6 +21,9 @@ const styles = {
 };
 
 function RoomCard({ room }) {
+  const likeCheck = useSelector(
+    (state) => state.room.rooms.filter((v) => v.id === room.id)[0].likeCheck,
+  );
   // const [, updateState] = useState();
   // const forceUpdate = useCallback(() => {
   //   updateState({});
@@ -29,15 +32,9 @@ function RoomCard({ room }) {
   const dispatch = useDispatch();
   function like() {
     dispatch(addLike(room.id));
-    setTimeout(() => {
-      dispatch(readRooms());
-    }, 1000);
   }
   function disLike() {
     dispatch(deleteLike(room.id));
-    setTimeout(() => {
-      dispatch(readRooms());
-    }, 1000);
   }
   console.log(room);
   return (
@@ -56,7 +53,7 @@ function RoomCard({ room }) {
           image={room.imageList[0]}
           alt="room img"
         />
-        <LikeButton onClick={room.likeCheck ? disLike : like} likeCheck={room.likeCheck} />
+        <LikeButton onClick={room.likeCheck ? disLike : like} likeCheck={likeCheck} />
       </AspectRatio>
       <AspectRatio sx={{ p: 0 }} ratio="3/1">
         {/* <CardContent> */}
