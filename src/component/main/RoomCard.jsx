@@ -24,12 +24,6 @@ function RoomCard({ room, locationHandler }) {
   const likeCheck = useSelector(
     (state) => state.room.rooms.filter((v) => v.id === room.id)[0].likeCheck,
   );
-  // const [, updateState] = useState();
-  // const forceUpdate = useCallback(() => {
-  //   updateState({});
-  //   console.log('update');
-  // }, []);
-  const { id, title, description, price, address } = room;
   const dispatch = useDispatch();
   function like() {
     dispatch(addLike(room.id));
@@ -37,7 +31,6 @@ function RoomCard({ room, locationHandler }) {
   function disLike() {
     dispatch(deleteLike(room.id));
   }
-  console.log(room);
   return (
     <Card
       sx={{
@@ -58,7 +51,6 @@ function RoomCard({ room, locationHandler }) {
         <LikeButton onClick={room.likeCheck ? disLike : like} likeCheck={likeCheck} />
       </AspectRatio>
       <AspectRatio sx={{ p: 0 }} ratio="3/1">
-        {/* <CardContent> */}
         <Grid container spacing={0} direction="row">
           <Grid item xs={12}>
             <Typography
@@ -137,7 +129,6 @@ function RoomCard({ room, locationHandler }) {
             </Typography>
           </Grid>
         </Grid>
-        {/* </CardContent> */}
       </AspectRatio>
     </Card>
   );

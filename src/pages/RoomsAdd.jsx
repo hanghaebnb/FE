@@ -173,6 +173,7 @@ const Container = styled.div`
 `;
 
 const P = styled.p`
+  font-family: var(--font-semibold);
   font-size: 25px;
   font-weight: bold;
   display: inline-block;
@@ -184,6 +185,7 @@ const P = styled.p`
   text-decoration: underline;
 `;
 const StInput = styled.input`
+  font-family: var(--font-regular);
   font-size: 15px;
   font-weight: bold;
   margin: 50px;
@@ -240,6 +242,7 @@ const StSubmitBtn = styled.button`
 `;
 
 const StSpanBar = styled.span`
+  font-family: var(--font-light);
   font-size: 17px;
 `;
 const StBorder = styled.div`

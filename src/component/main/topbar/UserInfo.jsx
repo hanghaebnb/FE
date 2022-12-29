@@ -45,6 +45,7 @@ function UserInfo() {
   };
   function logout() {
     removeCookies('accessToken');
+    handleClose();
     dispatch(initRooms());
     dispatch(initPage());
   }

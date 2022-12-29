@@ -114,6 +114,7 @@ const StWhereWeek = styled.button`
 `;
 
 const StWhereWeekText = styled.div`
+  font-family: var(--font-semibold);
   padding: 0 16px;
   font-size: 14px;
   line-height: 18px;

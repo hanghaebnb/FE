@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from './topbar/Logo';
 import Search from './topbar/Search';
@@ -10,7 +11,9 @@ function Topbar() {
       <StHeader>
         <StWrapper>
           <StLogoWrapper>
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
           </StLogoWrapper>
           <StSearchWrapper>
             <Search />

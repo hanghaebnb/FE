@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Login from '../../login/Login';
 import LangIcon from './LangIcon';
 import UserInfo from './UserInfo';
 
@@ -97,6 +96,7 @@ const StyledLink = styled(Link)`
   &:visited,
   &:link,
   &:active {
+    color: #222222;
     text-decoration: none;
   }
 `;
