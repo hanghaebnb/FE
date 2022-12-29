@@ -3,23 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
-import { readRooms, updateRooms, deleteRooms } from '../redux/modules/roomSlice';
+import { readRoom, updateRooms, deleteRooms } from '../redux/modules/roomSlice';
 import Topbar from '../component/main/TopbarRoom';
 
 export default function ShareId(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { rooms } = useSelector((state) => state.rooms);
-  console.log('posts', rooms);
+  const { rooms } = useSelector((state) => state.room);
   const propsParam = useParams();
-  const { userId } = propsParam;
+  const { id } = propsParam;
   // 포스트 고유 값 아이디가 같을때 필터
-  const detailData = rooms.filter((obj) => obj.id === userId);
-  console.log('detailData', detailData[0].content);
+  const detailData = rooms.filter((obj) => obj.id === id);
+  console.log('detailData', detailData.id);
+  console.log('detailData', rooms[0].id);
+  console.log('detailData', id);
   useEffect(() => {
-    dispatch(readRooms());
+    dispatch(readRoom(''));
   }, [dispatch]);
-
+  console.log('rooms', rooms);
   return (
     <div
       style={{
@@ -28,7 +29,7 @@ export default function ShareId(props) {
         paddingInlineEnd: '80px',
       }}
     >
-      <Topbar />
+      {/* <Topbar />
       <STContainer>
         <StBorder>
           <StSpan>{detailData[0].title}</StSpan>
@@ -53,7 +54,7 @@ export default function ShareId(props) {
         <StBorder>
           <StSpan>{detailData[0].type}</StSpan>
         </StBorder>
-      </STContainer>
+      </STContainer> */}
     </div>
   );
 }

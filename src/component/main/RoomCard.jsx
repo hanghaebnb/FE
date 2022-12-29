@@ -20,12 +20,13 @@ const styles = {
   },
 };
 
-function RoomCard({ room }) {
+function RoomCard({ room, locationHandler }) {
   // const [, updateState] = useState();
   // const forceUpdate = useCallback(() => {
   //   updateState({});
   //   console.log('update');
   // }, []);
+  const { id, title, description, price, address } = room;
   const dispatch = useDispatch();
   function like() {
     dispatch(addLike(room.id));
@@ -48,6 +49,7 @@ function RoomCard({ room }) {
         boxShadow: 'none',
         mb: '16px',
       }}
+      onClick={() => locationHandler(id)}
     >
       <AspectRatio sx={{ mb: '12px' }} ratio="20/19">
         <CardMedia

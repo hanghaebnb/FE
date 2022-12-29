@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Login from '../../login/Login';
 import LangIcon from './LangIcon';
-// eslint-disable-next-line import/namespace
 import UserInfo from './UserInfo';
 
 function TopbarRight() {
@@ -11,7 +10,7 @@ function TopbarRight() {
     <StWrapper>
       <StNav>
         <StLink>
-          <StyledLink to="/rooms">
+          <StyledLink to="/api/rooms/main">
             <StText>당신의 공간을 에어비앤비하세요</StText>
           </StyledLink>
         </StLink>

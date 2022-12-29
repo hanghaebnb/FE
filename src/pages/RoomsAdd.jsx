@@ -18,7 +18,7 @@ export default function RoomsAdd(isLogin) {
   const [rooms, setRooms] = useState({
     title: '',
     description: '',
-    price: '',
+    price: 0,
     address: '',
     type: '',
   });
@@ -43,26 +43,24 @@ export default function RoomsAdd(isLogin) {
     // ) {
     //   return alert('모든 항목을 입력해주세요.');
     // }
-
-    console.log(rooms);
-
     dispatch(
       createRoom({
-        title: rooms.title,
-        description: rooms.description,
-        price: rooms.price,
-        address: rooms.address,
+        room: {
+          title: rooms.title,
+          description: rooms.description,
+          price: rooms.price * 1,
+          address: rooms.address,
+          type: rooms.type,
+        },
         imageFile,
-        type: rooms.type,
       }),
     );
-    navigate(`/`);
+    // navigate(`/`);
     setRooms({
       title: '',
       description: '',
-      price: '',
+      price: 0,
       address: '',
-      imageFile: '',
       type: '',
     });
   };

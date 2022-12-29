@@ -10,17 +10,16 @@ export default function ShareId(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { rooms } = useSelector((state) => state.rooms);
-  console.log('posts', rooms);
+  console.log('posts', rooms); // id 지정
   const propsParam = useParams();
+  const { id } = propsParam;
   // 수정하기
   const [edit, setEdit] = useState({
     title: '',
     description: '',
     price: '',
     address: '',
-    imageFile: '',
     type: '',
-    userId: 1,
   });
   // 이미지 관련
   const [image, setImage] = useState(null);
@@ -36,12 +35,12 @@ export default function ShareId(props) {
     // }
     dispatch(
       updateRooms({
+        id,
         title: rooms.title,
         description: rooms.description,
         price: rooms.price,
         address: rooms.address,
         type: rooms.type,
-        userId: 1,
       }),
     );
     setEdit({
@@ -56,13 +55,12 @@ export default function ShareId(props) {
   // delete
   const roomsDelete = () => {
     // eslint-disable-next-line no-use-before-define
-    dispatch(deleteRooms(userId));
+    dispatch(deleteRooms(id));
     navigate(`/`);
   };
-  // id 지정
-  const { userId } = propsParam;
+
   // 포스트 고유 값 아이디가 같을때 필터
-  const detailData = rooms.filter((obj) => obj.id === userId);
+  const detailData = rooms.filter((obj) => obj.id === id);
   console.log('detailData', detailData[0].content);
   useEffect(() => {
     dispatch(readRooms());
@@ -108,7 +106,7 @@ export default function ShareId(props) {
         <StBorder>
           <StSpan>{detailData[0].type}</StSpan>
         </StBorder>
-        <StButton onClick={() => roomsDelete(userId)}>삭제하기</StButton>
+        <StButton onClick={() => roomsDelete(id)}>삭제하기</StButton>
         <StButton onClick={editToggleHandler}>수정하기</StButton>
         {toggle ? (
           <div>

@@ -10,8 +10,12 @@ export default function ImageUpload({ setImageFile }) {
   const [prevImg, setPrevImg] = useState([]);
   /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
   const handleImage = (event) => {
-    const imageLists = event.target.files;
+    const imageLists = [];
     const imageUrlLists = [...prevImg];
+    for (let i = 0; i < event.target.files.length; i++) {
+      imageLists.push(event.target.files[i]);
+    }
+    console.log(imageLists);
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);

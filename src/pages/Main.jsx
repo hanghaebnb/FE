@@ -6,6 +6,7 @@ import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { useCookies } from 'react-cookie';
 import { useInView } from 'react-intersection-observer';
+import { useNavigate } from 'react-router-dom';
 import { nonMemberReadRooms, readRooms } from '../redux/modules/roomSlice';
 import Topbar from '../component/main/Topbar';
 import RoomCard from '../component/main/RoomCard';
@@ -36,9 +37,14 @@ function Main() {
   const rooms = useSelector((state) => state.room.rooms);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
+
+  const locationHandler = (id) => {
+    navigate(`/api/rooms/${id}`);
+    console.log(id);
+  };
 
   function getHomes() {
     dispatch(readRooms('?type=house'));
@@ -63,7 +69,6 @@ function Main() {
   function getNonMemberHotel() {
     dispatch(nonMemberReadRooms('?type=hotel'));
   }
-
   // 무한스크롤
   const getItems = useCallback(() => {
     setLoading(true);
@@ -71,7 +76,6 @@ function Main() {
     else dispatch(nonMemberReadRooms(`?page=${page}&size=10`));
     setLoading(false);
   }, [dispatch, cookies, page]);
-
   useEffect(() => {
     getItems();
   }, [getItems]);
@@ -140,14 +144,14 @@ function Main() {
                     ref={ref}
                   >
                     {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
-                    <RoomCard room={room} />
+                    <RoomCard room={room} locationHandler={locationHandler} />
                   </Grid>
                 ) : (
                   // </div>
                   // <div className="room-item" key={room.id}>
                   <Grid item key={room.id} xxs={60} xs={30} sm={20} md={15} lg={12} xl={10}>
                     {/* <Grid key={room.id} item one={60} two={30} three={20} four={15} five={12} six={10}> */}
-                    <RoomCard room={room} />
+                    <RoomCard room={room} locationHandler={locationHandler} />
                   </Grid>
                   // </div>
                 )}
