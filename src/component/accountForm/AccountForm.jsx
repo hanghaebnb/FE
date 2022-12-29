@@ -66,6 +66,9 @@ function AccountForm({ open, isLogin, handleClose }) {
     };
     dispatch(signUp(account));
     dispatch(clearDuplicate());
+    setEmail('');
+    setPassword('');
+    setNickName('');
     handleClose();
   }
 
@@ -76,6 +79,8 @@ function AccountForm({ open, isLogin, handleClose }) {
       password,
     };
     dispatch(login({ ...account, setCookie }));
+    setEmail('');
+    setPassword('');
   }
 
   useEffect(() => {

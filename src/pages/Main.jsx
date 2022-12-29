@@ -44,6 +44,7 @@ function Main() {
   const page = useSelector((state) => state.room.page);
   const [loading, setLoading] = useState(false);
   const roomType = useRef('');
+  const price = useRef('');
 
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
@@ -68,9 +69,11 @@ function Main() {
 
   // 무한스크롤
   const getItems = useCallback(() => {
+    console.log(`?page=${page}&size=10${roomType.current}${price.current}`);
     setLoading(true);
-    if (cookies.accessToken) dispatch(readRooms(`?page=${page}&size=10${roomType.current}`));
-    else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}`));
+    if (cookies.accessToken)
+      dispatch(readRooms(`?page=${page}&size=10${roomType.current}${price.current}`));
+    else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}${price.current}`));
     setLoading(false);
   }, [dispatch, page]);
 
@@ -96,6 +99,7 @@ function Main() {
         getHomes={() => getHomes()}
         getApart={() => getApart()}
         getHotel={() => getHotel()}
+        price={price}
       />
       <Container
         maxWidth="100%"
