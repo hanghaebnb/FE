@@ -1,2 +1,4 @@
-const isLogin = () => !!localStorage.getItem('accessToken');
+import { getCookie } from './cookie';
+
+const isLogin = () => !!getCookie('accessToken');
 export default isLogin;

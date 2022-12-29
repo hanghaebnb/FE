@@ -12,15 +12,15 @@ export default function ShareId(props) {
   const { rooms } = useSelector((state) => state.room);
   const propsParam = useParams();
   const { id } = propsParam;
+  const roomid = Number(id);
   // 포스트 고유 값 아이디가 같을때 필터
-  const detailData = rooms.filter((obj) => obj.id === id);
-  console.log('detailData', detailData.id);
-  console.log('detailData', rooms[0].id);
-  console.log('detailData', id);
+  const detailData = rooms.filter((obj) => obj.id === roomid);
+  console.log('detailData', detailData[0].title);
+  console.log('rooms[0].id', rooms[0].id);
+  console.log('id', id);
   useEffect(() => {
-    dispatch(readRoom(''));
+    dispatch(readRoom());
   }, [dispatch]);
-  console.log('rooms', rooms);
   return (
     <div
       style={{
@@ -29,7 +29,7 @@ export default function ShareId(props) {
         paddingInlineEnd: '80px',
       }}
     >
-      {/* <Topbar />
+      {/* <Topbar /> */}
       <STContainer>
         <StBorder>
           <StSpan>{detailData[0].title}</StSpan>
@@ -54,7 +54,7 @@ export default function ShareId(props) {
         <StBorder>
           <StSpan>{detailData[0].type}</StSpan>
         </StBorder>
-      </STContainer> */}
+      </STContainer>
     </div>
   );
 }

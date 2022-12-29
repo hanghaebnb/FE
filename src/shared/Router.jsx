@@ -12,10 +12,8 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/api/rooms/main" element={<RoomsAdd />} />
-        {/* {isLogin() ? ( */}
-        <Route path="/api/rooms/:id" element={<RoomsUp />} />
-        {/* // ) : ( // <Route path="/api/rooms/:id" element={<RoomsUp />} />
-        // )} */}
+        {/* <Route path="/api/rooms/:id" element={<RoomsUp />} /> */}
+        <Route path="/api/rooms/:id" element={<RoomsUpdate />} />
       </Routes>
     </BrowserRouter>
   );

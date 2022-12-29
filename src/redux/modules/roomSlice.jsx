@@ -74,13 +74,17 @@ export const nonMemberReadRooms = createAsyncThunk(
 
 export const updateRooms = createAsyncThunk('room/UPDATE_ROOMS', async (payload, thunkAPI) => {
   try {
+    console.log('payload', payload);
     const formData = new FormData();
-    const json = JSON.stringify(payload.Room);
+    const json = JSON.stringify(payload.room);
     const blob = new Blob([json], { type: 'application/json' });
     formData.append('data', blob);
-    formData.append('file', payload.img);
 
-    const response = await baseURL.patch(`/api/rooms/${payload.id}`, formData, {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < payload.imageFile.length; i++) {
+      formData.append('file', payload.imageFile[i]);
+    }
+    const response = await baseURL.patch(`/api/rooms/${payload.room.id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -179,6 +183,9 @@ const roomSlice = createSlice({
     },
     [updateRooms.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.rooms = action.payload;
+      console.log('payload', action.payload);
+      alert('수정 완료!');
     },
     [updateRooms.rejected]: (state, action) => {
       state.isLoading = false;
