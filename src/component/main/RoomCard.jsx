@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-function RoomCard({ room }) {
+function RoomCard({ room, locationHandler }) {
   const likeCheck = useSelector(
     (state) => state.room.rooms.filter((v) => v.id === room.id)[0].likeCheck,
   );
@@ -39,6 +39,7 @@ function RoomCard({ room }) {
         boxShadow: 'none',
         mb: '16px',
       }}
+      onClick={() => locationHandler(id)}
     >
       <AspectRatio sx={{ mb: '12px' }} ratio="20/19">
         <CardMedia

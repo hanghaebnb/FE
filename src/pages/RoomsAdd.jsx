@@ -11,6 +11,7 @@ export default function RoomsAdd(isLogin) {
   // 값을 담을 두 공간 필요 1. 제목 2. 내용
   // 따라서 2개의 useState가 필요 현재 상태를 저장하고
   // 변경할 수 있다.
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // selectList
@@ -18,7 +19,7 @@ export default function RoomsAdd(isLogin) {
   const [rooms, setRooms] = useState({
     title: '',
     description: '',
-    price: '',
+    price: 0,
     address: '',
     type: '',
   });
@@ -35,34 +36,32 @@ export default function RoomsAdd(isLogin) {
   };
   // 추가하기 버튼
   const onSumitHandler = () => {
-    // if (
-    //   rooms.title.trim() === '' ||
-    //   rooms.description.trim() === '' ||
-    //   rooms.price.trim() === '' ||
-    //   rooms.address.trim() === ''
-    // ) {
-    //   return alert('모든 항목을 입력해주세요.');
-    // }
-
-    console.log(rooms);
-
+    if (
+      rooms.title.trim() === '' ||
+      rooms.description.trim() === '' ||
+      rooms.price.trim() === '' ||
+      rooms.address.trim() === ''
+    ) {
+      return alert('모든 항목을 입력해주세요.');
+    }
     dispatch(
       createRoom({
-        title: rooms.title,
-        description: rooms.description,
-        price: rooms.price,
-        address: rooms.address,
+        room: {
+          title: rooms.title,
+          description: rooms.description,
+          price: rooms.price * 1,
+          address: rooms.address,
+          type: rooms.type,
+        },
         imageFile,
-        type: rooms.type,
       }),
     );
     navigate(`/`);
     setRooms({
       title: '',
       description: '',
-      price: '',
+      price: 0,
       address: '',
-      imageFile: '',
       type: '',
     });
   };

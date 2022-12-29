@@ -9,7 +9,7 @@ function TopbarRight() {
     <StWrapper>
       <StNav>
         <StLink>
-          <StyledLink to="/rooms">
+          <StyledLink to="/api/rooms/main">
             <StText>당신의 공간을 에어비앤비하세요</StText>
           </StyledLink>
         </StLink>

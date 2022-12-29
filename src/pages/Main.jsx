@@ -13,6 +13,7 @@ import {
   nonMemberReadRooms,
   readRooms,
 } from '../redux/modules/roomSlice';
+import { useNavigate } from 'react-router-dom';
 import Topbar from '../component/main/Topbar';
 import RoomCard from '../component/main/RoomCard';
 import RoomType from '../component/main/RoomType';
@@ -45,9 +46,15 @@ function Main() {
   const [loading, setLoading] = useState(false);
   const roomType = useRef('');
   const query = useRef('');
+  const navigate = useNavigate();
 
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
+
+  const locationHandler = (id) => {
+    navigate(`/api/rooms/${id}`);
+    console.log(id);
+  };
 
   function getHomes() {
     roomType.current = '&type=house';
@@ -73,7 +80,6 @@ function Main() {
     dispatch(initRooms());
     dispatch(initPage());
   }
-
   // 무한스크롤
   const getItems = useCallback(() => {
     console.log(`?page=${page}&size=10${roomType.current}${query.current}`);
@@ -82,7 +88,7 @@ function Main() {
       dispatch(readRooms(`?page=${page}&size=10${roomType.current}${query.current}`));
     else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}${query.current}`));
     setLoading(false);
-  }, [dispatch, page]);
+  }, [dispatch, cookies, page]);
 
   useEffect(() => {
     getItems();
@@ -130,11 +136,11 @@ function Main() {
                     xl={10}
                     ref={ref}
                   >
-                    <RoomCard room={room} />
+                    <RoomCard room={room} locationHandler={locationHandler} />
                   </Grid>
                 ) : (
                   <Grid item key={room.id} xxs={60} xs={30} sm={20} md={15} lg={12} xl={10}>
-                    <RoomCard room={room} />
+                    <RoomCard room={room} locationHandler={locationHandler}/>
                   </Grid>
                 )}
               </React.Fragment>

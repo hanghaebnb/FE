@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from './topbar/Logo';
-import Search from './topbar/SearchRoom';
+import Search from './topbar/Search';
 import TopbarRight from './topbar/TopbarRight';
 
 function Topbar() {

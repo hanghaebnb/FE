@@ -23,8 +23,13 @@ export const createRoom = createAsyncThunk('room/CREATE_ROOM', async (payload, t
     const json = JSON.stringify(payload.room);
     const blob = new Blob([json], { type: 'application/json' });
     formData.append('data', blob);
-    formData.append('file', payload.imageFile);
-
+    // formData.append('file', payload.imageFile);
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < payload.imageFile.length; i++) {
+      formData.append('file', payload.imageFile[i]);
+    }
+    console.log(payload.imageFile);
+    console.log(payload.room);
     const response = await baseURL.post('/api/rooms', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -38,7 +43,17 @@ export const createRoom = createAsyncThunk('room/CREATE_ROOM', async (payload, t
 
 export const readRooms = createAsyncThunk('room/READ_ROOMS', async (payload, thunkAPI) => {
   try {
-    const response = await baseURL.get(`/api/rooms${payload}`);
+    const data = await baseURL.get(`/api/rooms`);
+    return thunkAPI.fulfillWithValue(data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+export const readRoom = createAsyncThunk('room/READ_ROOMS', async (payload, thunkAPI) => {
+  try {
+    console.log('payload', payload);
+    const response = await baseURL.get(`/api/rooms`);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -59,13 +74,17 @@ export const nonMemberReadRooms = createAsyncThunk(
 
 export const updateRooms = createAsyncThunk('room/UPDATE_ROOMS', async (payload, thunkAPI) => {
   try {
+    console.log('payload', payload);
     const formData = new FormData();
-    const json = JSON.stringify(payload.Room);
+    const json = JSON.stringify(payload.room);
     const blob = new Blob([json], { type: 'application/json' });
     formData.append('data', blob);
-    formData.append('file', payload.img);
 
-    const response = await baseURL.patch(`/api/rooms/${payload.room.userId}`, formData, {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < payload.imageFile.length; i++) {
+      formData.append('file', payload.imageFile[i]);
+    }
+    const response = await baseURL.patch(`/api/rooms/${payload.room.id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -130,7 +149,19 @@ const roomSlice = createSlice({
       state.isLoading = false;
       state.rooms = [...state.rooms, ...action.payload];
     },
+
     [readRooms.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [readRoom.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [readRoom.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.rooms = action.payload;
+    },
+    [readRoom.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -152,6 +183,9 @@ const roomSlice = createSlice({
     },
     [updateRooms.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.rooms = action.payload;
+      console.log('payload', action.payload);
+      alert('수정 완료!');
     },
     [updateRooms.rejected]: (state, action) => {
       state.isLoading = false;

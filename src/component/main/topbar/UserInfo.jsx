@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Menu from '@mui/material/Menu';
@@ -13,6 +14,7 @@ import { initPage, initRooms } from '../../../redux/modules/roomSlice';
 // import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
 
 function UserInfo() {
+  // eslint-disable-next-line no-shadow
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
