@@ -27,9 +27,9 @@ function Filter({ open, handleClose, query }) {
     else setMaxPrice(event.target.value * 1);
   }
 
-  function onKeyWordChangeHandler(event) {
-    setKeyWord(event.target.value);
-  }
+  // function onKeyWordChangeHandler(event) {
+  //   setKeyWord(event.target.value);
+  // }
 
   useEffect(() => {
     if (minPrice > maxPrice) setDisable(true);
@@ -37,13 +37,18 @@ function Filter({ open, handleClose, query }) {
   }, [minPrice, maxPrice]);
 
   function searchPrice() {
-    query.current = `&minPrice=${minPrice}&maxPrice=${maxPrice}&keyword=${keyWord}`;
+    query.current = `&minPrice=${minPrice}&maxPrice=${maxPrice}`;
     dispatch(initRooms());
     dispatch(initPage());
     setMinPrice(0);
     setMaxPrice(0);
     handleClose();
   }
+
+  // function keyWordSearch() {
+  //   dispatch(initRooms());
+  //   dispatch(initPage());
+  // }
 
   return (
     <Modal
@@ -66,7 +71,7 @@ function Filter({ open, handleClose, query }) {
         </StHeader>
         <StPrice>
           <StH2>가격 범위</StH2>
-          <Grid sx={{ pt: '18px', textAlign: 'center' }} container columns={30}>
+          <Grid sx={{ pt: '24px', textAlign: 'center' }} container columns={30}>
             <Grid item xs={14} sm={14} md={14}>
               <TextField
                 InputProps={{
@@ -91,7 +96,7 @@ function Filter({ open, handleClose, query }) {
               />
             </Grid>
           </Grid>
-          <div style={{ paddingTop: '18px' }}>
+          {/* <div style={{ paddingTop: '18px' }}>
             <TextField
               sx={{ width: '100%' }}
               value={keyWord}
@@ -99,11 +104,26 @@ function Filter({ open, handleClose, query }) {
               label="검색"
               variant="outlined"
             />
-          </div>
+          </div> */}
+          <StSubmitBtn onClick={() => searchPrice()} disabled={disable}>
+            검색
+          </StSubmitBtn>
         </StPrice>
-        <StSubmitBtn onClick={() => searchPrice()} disabled={disable}>
-          검색
-        </StSubmitBtn>
+        {/* <StPrice>
+          <StH2>키워드로 검색</StH2>
+          <div style={{ paddingTop: '18px' }}>
+            <TextField
+              sx={{ width: '100%' }}
+              value={keyWord}
+              onChange={(event) => onKeyWordChangeHandler(event)}
+              label="키워드"
+              variant="outlined"
+            />
+          </div>
+          <StSubmitBtn onClick={() => searchPrice()} disabled={disable}>
+            검색
+          </StSubmitBtn>
+        </StPrice> */}
       </StBox>
     </Modal>
   );
@@ -111,7 +131,6 @@ function Filter({ open, handleClose, query }) {
 const StSubmitBtn = styled.button`
   cursor: pointer;
   display: inline-block !important;
-  margin: 0px !important;
   position: absolute !important;
   right: 24px;
   bottom: 24px;
@@ -157,6 +176,7 @@ const StPrice = styled.div`
   padding-bottom: 32px !important;
   padding-left: 24px !important;
   padding-right: 24px !important;
+  /* border-bottom: 1px solid rgb(235, 235, 235) !important; */
 `;
 
 const StBox = styled(Box)`

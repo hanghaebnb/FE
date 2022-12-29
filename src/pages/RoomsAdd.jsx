@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Box, Modal, Typography } from '@mui/material';
 import ImageUpload from '../component/post/ImageFile/ImageUpload';
-import { createRoom } from '../redux/modules/roomSlice';
+import { createRoom, initPage, initRooms } from '../redux/modules/roomSlice';
 import Topbar from '../component/main/TopbarRoom';
 
 export default function RoomsAdd(isLogin) {
@@ -24,10 +24,6 @@ export default function RoomsAdd(isLogin) {
     type: '',
   });
   const [imageFile, setImageFile] = useState(null);
-  console.log('ImageFile', imageFile);
-  useEffect(() => {
-    console.log(imageFile);
-  }, [imageFile]);
 
   // StInput값
   const onChangeHandler = (e) => {
@@ -134,7 +130,6 @@ export default function RoomsAdd(isLogin) {
             value={rooms.type}
             onChange={(e) => {
               setRooms({ ...rooms, type: e.target.value });
-              console.log(e.target.value);
             }}
           >
             {selectList.map((item) => (
@@ -161,6 +156,10 @@ export default function RoomsAdd(isLogin) {
 }
 
 const Container = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: inline-block;
   vertical-align: middle;
   max-width: 1000px;
@@ -168,7 +167,6 @@ const Container = styled.div`
   width: 70%;
   height: 70%;
   text-align: center;
-  padding-left: 180px;
   justify-content: 10px;
 `;
 

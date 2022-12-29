@@ -11,7 +11,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    console.log('요청 보내기 전');
     const token = localStorage.getItem('token');
     if (token) {
       config.headers[''] = `${token}`;

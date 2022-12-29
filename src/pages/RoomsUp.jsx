@@ -15,9 +15,6 @@ export default function ShareId(props) {
   const roomid = Number(id);
   // 포스트 고유 값 아이디가 같을때 필터
   const detailData = rooms.filter((obj) => obj.id === roomid);
-  console.log('detailData', detailData[0].title);
-  console.log('rooms[0].id', rooms[0].id);
-  console.log('id', id);
   useEffect(() => {
     dispatch(readRoom());
   }, [dispatch]);

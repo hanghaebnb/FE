@@ -109,11 +109,9 @@ function AccountForm({ open, isLogin, handleClose }) {
   useEffect(() => {
     setCheckEmail(!duplicate.emailDuplicate);
     setCheckNick(!duplicate.nickDuplicate);
-    // console.log(duplicate.emailDuplicate, duplicate.nickDuplicate);
   }, [duplicate.emailDuplicate, duplicate.nickDuplicate]);
 
   useEffect(() => {
-    // console.log(checkEmail, checkNick);
     if (checkEmail && checkNick && passwordCheck.test(password)) setDisable(false);
     else setDisable(true);
   }, [checkEmail, checkNick, password]);

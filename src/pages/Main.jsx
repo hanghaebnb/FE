@@ -6,6 +6,7 @@ import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { useCookies } from 'react-cookie';
 import { useInView } from 'react-intersection-observer';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   increasePage,
   initPage,
@@ -13,7 +14,6 @@ import {
   nonMemberReadRooms,
   readRooms,
 } from '../redux/modules/roomSlice';
-import { useNavigate } from 'react-router-dom';
 import Topbar from '../component/main/Topbar';
 import RoomCard from '../component/main/RoomCard';
 import RoomType from '../component/main/RoomType';
@@ -53,7 +53,6 @@ function Main() {
 
   const locationHandler = (id) => {
     navigate(`/api/rooms/${id}`);
-    console.log(id);
   };
 
   function getHomes() {
@@ -82,13 +81,12 @@ function Main() {
   }
   // 무한스크롤
   const getItems = useCallback(() => {
-    console.log(`?page=${page}&size=10${roomType.current}${query.current}`);
     setLoading(true);
     if (cookies.accessToken)
       dispatch(readRooms(`?page=${page}&size=10${roomType.current}${query.current}`));
     else dispatch(nonMemberReadRooms(`?page=${page}&size=10${roomType.current}${query.current}`));
     setLoading(false);
-  }, [dispatch, cookies, page]);
+  }, [dispatch, page]);
 
   useEffect(() => {
     getItems();
@@ -136,11 +134,11 @@ function Main() {
                     xl={10}
                     ref={ref}
                   >
-                    <RoomCard room={room} locationHandler={locationHandler} />
+                    <RoomCard room={room} />
                   </Grid>
                 ) : (
                   <Grid item key={room.id} xxs={60} xs={30} sm={20} md={15} lg={12} xl={10}>
-                    <RoomCard room={room} locationHandler={locationHandler}/>
+                    <RoomCard room={room} />
                   </Grid>
                 )}
               </React.Fragment>

@@ -4,7 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
-import { readRoom, updateRooms, deleteRooms } from '../redux/modules/roomSlice';
+import {
+  readRoom,
+  updateRooms,
+  deleteRooms,
+  initRooms,
+  initPage,
+} from '../redux/modules/roomSlice';
 import Topbar from '../component/main/TopbarRoom';
 import ImageUpload from '../component/post/ImageFile/ImageUpload';
 
@@ -13,12 +19,14 @@ export default function ShareId(props) {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookies] = useCookies(['accessToken']);
   const rooms = useSelector((state) => state.room.rooms);
-  console.log('posts', rooms); // id 지정
+  // console.log('posts', rooms); // id 지정
   const propsParam = useParams();
   const { id } = propsParam;
   const roomid = Number(id);
   // 포스트 고유 값 아이디가 같을때 필터
   const detailData = rooms.filter((obj) => obj.id === roomid);
+  console.log(detailData);
+  console.log(rooms);
   const selectList = ['카테고리를 선택해주세요', 'house', 'Apartment', 'hotel'];
   // 수정하기
   const [edit, setEdit] = useState({
@@ -65,7 +73,9 @@ export default function ShareId(props) {
       address: '',
       type: '',
     });
-    // navigate(`/`);
+    navigate(`/`);
+    dispatch(initRooms());
+    dispatch(initPage());
   };
   // delete
   const roomsDelete = () => {
@@ -81,7 +91,7 @@ export default function ShareId(props) {
     // eslint-disable-next-line no-unused-expressions
     toggle ? setToggle(false) : setToggle(true);
   };
-  console.log(edit);
+  // console.log(edit);
 
   return (
     <div
@@ -93,7 +103,7 @@ export default function ShareId(props) {
     >
       {/* <Topbar /> */}
       <STContainer>
-        <StImg alt="image" src={detailData[0].imageList} />
+        <StImg alt="image" src={detailData[0].imageList[0]} />
         <StBorder>
           <StSpan>{detailData[0].title}</StSpan>
         </StBorder>
@@ -229,6 +239,10 @@ const StImg = styled.img`
 `;
 
 const STContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: inline-block;
   vertical-align: middle;
   max-width: 1000px;
@@ -236,7 +250,6 @@ const STContainer = styled.div`
   width: 70%;
   height: 70%;
   text-align: center;
-  padding-left: 180px;
   justify-content: 10px;
 `;
 // 작성하기 버튼
@@ -255,6 +268,7 @@ const StButton = styled.button`
   color: white;
   font-weight: 700;
   font-size: 13px;
+  font-family: var(--font-regular);
   width: 50%;
   min-height: 50px;
   margin-bottom: 50px;
@@ -325,6 +339,7 @@ const StBorder = styled.div`
   font-weight: 600;
 `;
 const StSpan = styled.span`
+  font-family: var(--font-light);
   font-size: 18px;
   font-weight: bold;
   margin: 50px;

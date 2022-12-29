@@ -15,7 +15,6 @@ export default function ImageUpload({ setImageFile }) {
     for (let i = 0; i < event.target.files.length; i++) {
       imageLists.push(event.target.files[i]);
     }
-    console.log(imageLists);
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);

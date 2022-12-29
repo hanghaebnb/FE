@@ -20,13 +20,7 @@ function RoomType({ getHomes, getApart, getHotel, query, clear }) {
       <StRoomTypeContainer>
         <StBtn onClick={() => clear()}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            {/* <IconButton
-              sx={{ width: '24px', height: '24px', marginBottom: '8px' }}
-              disableRipple
-              onClick={() => clear()}
-            > */}
             <RefreshIcon sx={{ width: '24px', height: '24px', marginBottom: '8px' }} />
-            {/* </IconButton> */}
             <StSpan>초기화</StSpan>
           </div>
         </StBtn>
