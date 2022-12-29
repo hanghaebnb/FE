@@ -36,7 +36,8 @@ const StHeader = styled.header`
   --header_brand-color: #ff385c;
   position: relative;
   /* max-width: 1760px; */
-  border-bottom: 1px solid #ebebeb;
+  margin-bottom: 1px;
+  z-index: 10;
 `;
 
 const StWrapper = styled.div`

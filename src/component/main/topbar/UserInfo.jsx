@@ -10,7 +10,12 @@ import UserIcon from './UserIcon';
 import UserMenuIcon from './UserMenuIcon';
 import SignUp from '../../signup/SignUp';
 import Login from '../../login/Login';
+<<<<<<< HEAD
 import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
+=======
+import { initPage, initRooms } from '../../../redux/modules/roomSlice';
+// import { setSignUpOpen, setAnchorEl, setLoginOpen } from '../../../redux/modules/modalSlice';
+>>>>>>> c17658742af3675e006a009aea0ce5455945aec6
 
 function UserInfo() {
   // eslint-disable-next-line no-shadow
@@ -44,6 +49,8 @@ function UserInfo() {
   };
   function logout() {
     removeCookies('accessToken');
+    dispatch(initRooms());
+    dispatch(initPage());
   }
   return (
     <>
@@ -67,7 +74,7 @@ function UserInfo() {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={cookies.accessToken ? logout : handleLoginOpen}>
+          <MenuItem onClick={cookies.accessToken ? () => logout() : () => handleLoginOpen()}>
             {cookies.accessToken ? '로그아웃' : '로그인'}
           </MenuItem>
           <Divider />
