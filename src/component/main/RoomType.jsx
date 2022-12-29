@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { IconButton } from '@mui/material';
 import FilterIcon from './roomtype/FilterIcon';
 import SetPrice from './roomtype/SetPrice';
 
-function RoomType({ getHomes, getApart, getHotel, price }) {
+function RoomType({ getHomes, getApart, getHotel, price, clear }) {
   const [open, setOpen] = useState(false);
 
   function handleOpen() {
@@ -16,6 +18,18 @@ function RoomType({ getHomes, getApart, getHotel, price }) {
   return (
     <>
       <StRoomTypeContainer>
+        <StBtn onClick={() => getHomes()}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <IconButton
+              sx={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              disableRipple
+              onClick={() => clear()}
+            >
+              <RefreshIcon />
+            </IconButton>
+            <StSpan>초기화</StSpan>
+          </div>
+        </StBtn>
         <StBtn onClick={() => getHomes()}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <img
@@ -44,6 +58,146 @@ function RoomType({ getHomes, getApart, getHotel, price }) {
               alt="hotel.png"
             />
             <StSpan>호텔</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/hanok.png"
+              alt="hanok.png"
+            />
+            <StSpan>한옥</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/ryokan.png"
+              alt="ryokan.png"
+            />
+            <StSpan>료칸</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/ufo.png"
+              alt="ufo.png"
+            />
+            <StSpan>우주선</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/camping.png"
+              alt="camping.png"
+            />
+            <StSpan>캠핑장</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/container.png"
+              alt="container.png"
+            />
+            <StSpan>컨테이너</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/castle.png"
+              alt="castle.png"
+            />
+            <StSpan>성</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/national_park.png"
+              alt="national_park.png"
+            />
+            <StSpan>국립공원</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/farm.png"
+              alt="farm.png"
+            />
+            <StSpan>농장</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/desert.png"
+              alt="desert.png"
+            />
+            <StSpan>사막</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/cave.png"
+              alt="cave.png"
+            />
+            <StSpan>동굴</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/island.png"
+              alt="island.png"
+            />
+            <StSpan>섬</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/north_pole.png"
+              alt="north_pole.png"
+            />
+            <StSpan>북극</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/camping.png"
+              alt="camping.png"
+            />
+            <StSpan>캠핑장</StSpan>
+          </div>
+        </StBtn>
+        <StBtn>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+              src="img/tree_house.png"
+              alt="tree_house.png"
+            />
+            <StSpan>나무 위</StSpan>
           </div>
         </StBtn>
         <StFilterDiv>
@@ -111,6 +265,7 @@ const StRoomTypeContainer = styled.div`
   border-top: 1px solid #ebebeb;
   border-bottom: 1px solid #ebebeb;
   margin-bottom: 30px;
+  overflow: hidden;
 `;
 
 const StBtn = styled.button`

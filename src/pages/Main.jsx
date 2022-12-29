@@ -67,6 +67,13 @@ function Main() {
     dispatch(initPage());
   }
 
+  function clear() {
+    roomType.current = '';
+    price.current = '';
+    dispatch(initRooms());
+    dispatch(initPage());
+  }
+
   // 무한스크롤
   const getItems = useCallback(() => {
     console.log(`?page=${page}&size=10${roomType.current}${price.current}`);
@@ -100,6 +107,7 @@ function Main() {
         getApart={() => getApart()}
         getHotel={() => getHotel()}
         price={price}
+        clear={() => clear()}
       />
       <Container
         maxWidth="100%"
